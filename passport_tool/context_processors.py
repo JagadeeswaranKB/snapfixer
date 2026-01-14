@@ -1,22 +1,21 @@
 from .models import CountryRule, SiteSettings, PageMeta
 
 def country_rules(request):
-    all_countries = CountryRule.objects.filter(is_exam=False, is_tool=False).exclude(country="Custom Size").order_by('country')
+    # 1. Distinct countries for the "By Country" column
+    # We group by exam_country and take the best 'Passport' rule for each
+    all_rules = CountryRule.objects.filter(is_exam=False, is_tool=False).exclude(exam_country="Global").order_by('exam_country', 'country')
+    
+    unique_countries = {}
+    for r in all_rules:
+        if r.exam_country not in unique_countries:
+            unique_countries[r.exam_country] = r
+        elif "Passport" in r.country and "Passport" not in unique_countries[r.exam_country].country:
+            unique_countries[r.exam_country] = r
+
+    nav_countries = sorted(unique_countries.values(), key=lambda x: x.exam_country)
+    
     exams = CountryRule.objects.filter(is_exam=True).order_by('exam_country', 'exam_state', 'exam_organization', 'country')
     tools = list(CountryRule.objects.filter(is_tool=True))
-    
-    # Custom ordering for tools
-    # Desired order: Signature Resizer, Compress 20KB, Printable Sheets, then Converters
-    def tool_sort_key(tool):
-        slug = tool.slug
-        if 'signature' in slug: return 1
-        if 'compress-image' in slug: return 2
-        if 'printable' in slug or 'sheet' in slug: return 3
-        # Converters and others come last, sorted alphabetically by country name
-        return 10 + (ord(tool.country[0]) if tool.country else 0)
-        
-    tools.sort(key=tool_sort_key)
-    custom_size_rule = CountryRule.objects.filter(country="Custom Size").first()
     
     # Build Hierarchies: Exams and Visas
     exam_hierarchy = {}
@@ -52,11 +51,11 @@ def country_rules(request):
             target_hierarchy[c]["states"][s][o].append(item)
     
     return {
-        'nav_countries': all_countries,
+        'nav_countries': nav_countries,
         'exam_hierarchy': exam_hierarchy,
         'visa_hierarchy': visa_hierarchy,
         'nav_tools': tools,
-        'custom_size_rule': custom_size_rule,
+        'custom_size_rule': CountryRule.objects.filter(slug='custom-size-passport-photo').first(),
         'site_settings': SiteSettings.load(),
     }
 

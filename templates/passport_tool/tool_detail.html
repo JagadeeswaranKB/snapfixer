@@ -7,7 +7,7 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "SnapFixer - {{ country_rule.country }} Tool",
+  "name": "SnapFixer - {{ country_rule.exam_country }} {{ country_rule.country }} Tool",
   "applicationCategory": "Photography",
   "operatingSystem": "Web",
   "offers": {
@@ -63,7 +63,8 @@
         {% else %}
         <span class="hover:text-blue-600">Passports</span> /
         {% endif %}
-        <span class="text-gray-900 dark:text-white font-medium">{{ country_rule.country }}</span>
+        <span class="text-gray-900 dark:text-white font-medium">{{ country_rule.exam_country }} {{ country_rule.country
+            }}</span>
     </nav>
 
     <div class="mb-8">
@@ -659,7 +660,8 @@
 {% if country_rule.guide_steps %}
 <section id="guide"
     class="mt-16 bg-white rounded-3xl shadow-sm p-8 md:p-12 border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8 dark:text-white text-center">How to create a {{ country_rule.country|default:'Passport' }} photo</h2>
+    <h2 class="text-3xl font-bold text-gray-900 mb-8 dark:text-white text-center">How to create a {{
+        country_rule.country|default:'Passport' }} photo</h2>
     <div class="prose prose-blue max-w-none dark:prose-invert">
         {{ country_rule.guide_steps|safe }}
     </div>
@@ -668,7 +670,8 @@
 
 <!-- Specifications Section -->
 <section id="specifications" class="mt-16">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8 dark:text-white text-center">Ultimate Guide to {{ country_rule.country|default:'Passport' }} Photos</h2>
+    <h2 class="text-3xl font-bold text-gray-900 mb-8 dark:text-white text-center">Ultimate Guide to {{
+        country_rule.country|default:'Passport' }} Photos</h2>
 
     <!-- Dynamic AI-Generated SEO Content -->
     <div
@@ -689,7 +692,8 @@
             <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
                 <tr>
                     <td class="px-6 py-4 font-bold text-gray-700 dark:text-gray-300">Photo Size</td>
-                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">{{ country_rule.width_mm }}mm x {{ country_rule.height_mm }}mm</td>
+                    <td class="px-6 py-4 text-gray-600 dark:text-gray-400">{{ country_rule.width_mm }}mm x {{
+                        country_rule.height_mm }}mm</td>
                 </tr>
                 <tr>
                     <td class="px-6 py-4 font-bold text-gray-700 dark:text-gray-300">Background Color</td>

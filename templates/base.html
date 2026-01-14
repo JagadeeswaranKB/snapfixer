@@ -49,7 +49,7 @@
     <meta property="og:description"
         content="{% if page_meta.og_description %}{{ page_meta.og_description }}{% else %}{% block og_description %}{% if post.og_description %}{{ post.og_description }}{% elif country_rule.og_description %}{{ country_rule.og_description }}{% elif og_description %}{{ og_description }}{% elif meta_description %}{{ meta_description }}{% else %}Convert your selfie into a compliant passport/visa photo for 200+ countries. Free, secure, and instant.{% endif %}{% endblock %}{% endif %}">
     <meta property="og:image"
-        content="{% if page_meta.og_image %}{{ page_meta.og_image.url }}{% elif post.og_image %}{{ post.og_image.url }}{% elif country_rule.og_image %}{{ country_rule.og_image.url }}{% elif og_image %}{{ og_image.url }}{% else %}https://snapfixer.com/static/og-image.jpg{% endif %}">
+        content="{% if page_meta.og_image and page_meta.og_image.url %}{{ page_meta.og_image.url }}{% elif post.og_image and post.og_image.url %}{{ post.og_image.url }}{% elif country_rule.og_image and country_rule.og_image.url %}{{ country_rule.og_image.url }}{% elif og_image and og_image.url %}{{ og_image.url }}{% else %}https://snapfixer.com/static/og-image.jpg{% endif %}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="{{ site_settings.site_name }}">
@@ -64,7 +64,7 @@
     <meta name="twitter:description"
         content="{% if page_meta.twitter_description %}{{ page_meta.twitter_description }}{% else %}{% block twitter_description %}{% if post.twitter_description %}{{ post.twitter_description }}{% elif country_rule.twitter_description %}{{ country_rule.twitter_description }}{% elif twitter_description %}{{ twitter_description }}{% elif meta_description %}{{ meta_description }}{% else %}Convert your selfie into a compliant passport/visa photo for 200+ countries. Free, secure, and instant.{% endif %}{% endblock %}{% endif %}">
     <meta name="twitter:image"
-        content="{% if page_meta.twitter_image %}{{ page_meta.twitter_image.url }}{% elif post.twitter_image %}{{ post.twitter_image.url }}{% elif country_rule.twitter_image %}{{ country_rule.twitter_image.url }}{% elif twitter_image %}{{ twitter_image.url }}{% else %}https://snapfixer.com/static/twitter-card.jpg{% endif %}">
+        content="{% if page_meta.twitter_image and page_meta.twitter_image.url %}{{ page_meta.twitter_image.url }}{% elif post.twitter_image and post.twitter_image.url %}{{ post.twitter_image.url }}{% elif country_rule.twitter_image and country_rule.twitter_image.url %}{{ country_rule.twitter_image.url }}{% elif twitter_image and twitter_image.url %}{{ twitter_image.url }}{% else %}https://snapfixer.com/static/twitter-card.jpg{% endif %}">
 
     <!-- Additional SEO Meta Tags -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -485,7 +485,7 @@
                                         {% for country in nav_countries %}
                                         <a href="{% url 'tool_detail' slug=country.slug %}"
                                             class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
-                                            {{ country.flag_emoji }} {{ country.country }}
+                                            {{ country.flag_emoji }} {{ country.exam_country }}
                                         </a>
                                         {% endfor %}
                                     </div>
