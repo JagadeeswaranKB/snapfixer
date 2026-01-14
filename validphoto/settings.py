@@ -21,9 +21,18 @@ if not SECRET_KEY:
 DEBUG = env('DEBUG')
 
 # Handle ALLOWED_HOSTS from env or default
-_raw_hosts = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', '.koyeb.app'])
-# Clean hosts: remove http://, https://, and trailing slashes
-ALLOWED_HOSTS = [host.replace('https://', '').replace('http://', '').split('/')[0] for host in _raw_hosts]
+_raw_hosts = env.list('ALLOWED_HOSTS', default=['.koyeb.app', 'localhost', '127.0.0.1'])
+# Clean hosts: remove http://, https://, trailing slashes, and handle un-evaluated Koyeb templates
+ALLOWED_HOSTS = []
+for host in _raw_hosts:
+    if '{{' in host or not host:
+        continue
+    clean = host.replace('https://', '').replace('http://', '').split('/')[0]
+    ALLOWED_HOSTS.append(clean)
+
+# Always allow Koyeb domains as a fallback
+if '.koyeb.app' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('.koyeb.app')
 
 # Security Settings for Production
 if not DEBUG:
@@ -33,20 +42,23 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
     
     # Get direct CSRF origins or build from ALLOWED_HOSTS
+    CSRF_TRUSTED_ORIGINS = []
     env_csrf = os.environ.get('CSRF_TRUSTED_ORIGINS')
     if env_csrf:
         CSRF_TRUSTED_ORIGINS = env_csrf.split(',')
     else:
         # Default construction: Ensure every host has https://
-        CSRF_TRUSTED_ORIGINS = []
         for host in ALLOWED_HOSTS:
             if host == '*':
                 CSRF_TRUSTED_ORIGINS.append("https://*.koyeb.app")
             else:
-                # Add protocol if missing
                 clean_host = host.lstrip('.')
                 CSRF_TRUSTED_ORIGINS.append(f"https://{clean_host}")
                 CSRF_TRUSTED_ORIGINS.append(f"https://*.{clean_host}")
+        
+        # Safe default for Koyeb
+        if not any('.koyeb.app' in origin for origin in CSRF_TRUSTED_ORIGINS):
+            CSRF_TRUSTED_ORIGINS.append("https://*.koyeb.app")
 
 # Application definition
 INSTALLED_APPS = [
