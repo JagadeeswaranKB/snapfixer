@@ -29,7 +29,17 @@ if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS if host != '*']
+    
+    # Get direct CSRF origins or build from ALLOWED_HOSTS
+    env_csrf = os.environ.get('CSRF_TRUSTED_ORIGINS')
+    if env_csrf:
+        CSRF_TRUSTED_ORIGINS = env_csrf.split(',')
+    else:
+        # Default construction
+        CSRF_TRUSTED_ORIGINS = [f"https://{host}" for host in ALLOWED_HOSTS if host != '*']
+        # If it's still empty (because of '*'), add a safe default for Koyeb
+        if not CSRF_TRUSTED_ORIGINS:
+            CSRF_TRUSTED_ORIGINS = ["https://*.koyeb.app"]
 
 # Application definition
 INSTALLED_APPS = [
