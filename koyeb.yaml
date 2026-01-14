@@ -10,20 +10,33 @@ services:
       - key: DEBUG
         value: "0"
       - key: ALLOWED_HOSTS
-        value: "*" # Update with your domain later
+        value: "*"
       - key: PORT
         value: "8000"
+      - key: SECRET_KEY
+        secret: SECRET_KEY
+      - key: DATABASE_URL
+        secret: DATABASE_URL
+      - key: REDIS_URL
+        secret: REDIS_URL
     instance_type: nano
     health_checks:
       - http:
           path: /
           port: 8000
     regions:
-      - fra # Frankfurt (Europe)
+      - fra
   - name: worker
     type: docker
     imageUri: .
     command: celery -A validphoto worker -l info --pool=solo
+    env:
+      - key: SECRET_KEY
+        secret: SECRET_KEY
+      - key: DATABASE_URL
+        secret: DATABASE_URL
+      - key: REDIS_URL
+        secret: REDIS_URL
     instance_type: nano
     regions:
       - fra
