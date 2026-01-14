@@ -22,8 +22,14 @@ RUN pip install --default-timeout=1000 --no-cache-dir -r requirements.txt
 # Copy project
 COPY . /app/
 
+# Collect static files during build
+RUN python manage.py collectstatic --noinput
+
+# Make start script executable
+RUN chmod +x /app/start.sh
+
 # Expose port
 EXPOSE 8000
 
-# Start gunicorn
-CMD ["gunicorn", "validphoto.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "1", "--timeout", "300", "--log-level", "debug"]
+# Start via script
+CMD ["/app/start.sh"]
