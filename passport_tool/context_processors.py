@@ -7,9 +7,10 @@ def country_rules(request):
     
     unique_countries = {}
     for r in all_rules:
+        c_name = r.country or ""
         if r.exam_country not in unique_countries:
             unique_countries[r.exam_country] = r
-        elif "Passport" in r.country and "Passport" not in unique_countries[r.exam_country].country:
+        elif "Passport" in c_name and "Passport" not in (unique_countries[r.exam_country].country or ""):
             unique_countries[r.exam_country] = r
 
     nav_countries = sorted(unique_countries.values(), key=lambda x: x.exam_country)

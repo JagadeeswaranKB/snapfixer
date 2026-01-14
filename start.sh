@@ -9,10 +9,11 @@ echo "Starting deployment setup..."
 echo "Applying database migrations..."
 python manage.py migrate --noinput
 
-# 2. Import and Cleanup data
-echo "Updating photo rules and cleaning duplicates..."
+# 2. Import and Cleanup and SEO-Optimize data
+echo "Updating photo rules, cleaning duplicates, and optimizing SEO..."
 python manage.py import_rules
 python manage.py cleanup_database
+# python manage.py optimize_all_meta_tags  # Merged into cleanup_database for efficiency
 
 # 3. Create a superuser if it doesn't exist (optional but helpful)
 # You can set DJANGO_SUPERUSER_PASSWORD, DJANGO_SUPERUSER_USERNAME, DJANGO_SUPERUSER_EMAIL in Koyeb

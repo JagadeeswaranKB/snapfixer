@@ -2,13 +2,15 @@ import json
 import os
 import re
 from django.core.management.base import BaseCommand
-from passport_tool.models import CountryRule, SiteSettings
+from passport_tool.models import CountryRule, SiteSettings, PageMeta
 from django.utils.text import slugify
 
 class Command(BaseCommand):
-    help = 'Final precise cleanup and categorization for SnapFixer'
+    help = 'Master Cleanup: Strict SEO, Full Hierarchy, and Stability Fix'
 
     def handle(self, *args, **options):
+        self.stdout.write("Starting Master Database Cleanup...")
+        
         # 1. Flag mapping
         flags = {
             "India": "🇮🇳", "USA": "🇺🇸", "UK": "🇬🇧", "Canada": "🇨🇦", "Australia": "🇦🇺",
@@ -19,27 +21,14 @@ class Command(BaseCommand):
             "Mexico": "🇲🇽", "Russia": "🇷🇺", "Turkey": "🇹🇷"
         }
 
-        # 2. Add utility tools
-        utility_tools = [
-            ("Signature Resizer", "signature-resizer", 35, 45, True, False),
-            ("Compress Image to 20KB", "compress-image-20kb", 35, 45, True, False),
-            ("Printable Sheets", "printable-sheets", 35, 45, True, False),
+        # 2. Indian States List for automatic detection
+        indian_states = [
+            "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+            "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+            "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram",
+            "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
+            "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
         ]
-        for name, slug, w, h, is_tool, is_exam in utility_tools:
-            CountryRule.objects.update_or_create(
-                slug=slug,
-                defaults={
-                    'country': name,
-                    'exam_country': 'Global',
-                    'width_mm': w,
-                    'height_mm': h,
-                    'is_tool': is_tool,
-                    'is_exam': is_exam,
-                    'meta_title': f"{name} - Free Online Tool",
-                    'meta_description': f"Free online {name}. Quick and easy.",
-                    'content_body': f"Use our free {name} tool.",
-                }
-            )
 
         # 3. Load lookup map from JSON
         json_path = os.path.join(os.getcwd(), 'global_photo_rules.json')
@@ -52,18 +41,17 @@ class Command(BaseCommand):
                     for doc in entry['documents']:
                         doc_to_country[doc['name']] = cname
 
-        # 4. Correct all entries
         seen_slugs = set()
         
-        # Priority order: Fix entries by category
-        for rule in CountryRule.objects.all():
-            if rule.is_tool: 
+        # 4. Process all CountryRule entries
+        for rule in CountryRule.objects.all().order_by('id'):
+            if rule.is_tool:
                 seen_slugs.add(rule.slug)
                 continue
 
-            orig_name = rule.country # e.g. "Indian Passport"
+            orig_name = rule.country or "Unknown"
             
-            # Find the country it belongs to
+            # a. Determine Country
             c_name = doc_to_country.get(orig_name, "Other")
             if c_name == "Other":
                 for country in flags.keys():
@@ -71,44 +59,48 @@ class Command(BaseCommand):
                         c_name = country
                         break
             
-            # Clean document name: "Indian Passport" -> "Passport"
+            # b. Clean Document Name
             clean_doc_name = orig_name
             if c_name != "Other" and c_name.lower() in orig_name.lower():
                 clean_doc_name = re.sub(re.escape(c_name), '', orig_name, flags=re.IGNORECASE).strip()
-                # Also remove adjectives: "Indian" -> ""
-                if c_name == "India": clean_doc_name = re.sub(r'Indian', '', clean_doc_name, flags=re.IGNORECASE).strip()
-                elif c_name == "USA": clean_doc_name = re.sub(r'US', '', clean_doc_name, flags=re.IGNORECASE).strip()
-                elif c_name == "UK": clean_doc_name = re.sub(r'UK', '', clean_doc_name, flags=re.IGNORECASE).strip()
+                # Remove common adjectives
+                clean_doc_name = re.sub(r'^(Indian|US|UK|British|Canadian|Australian|Chinese)\s+', '', clean_doc_name, flags=re.IGNORECASE).strip()
 
             if not clean_doc_name:
                 clean_doc_name = "Passport"
 
-            # Re-detect type
-            is_visa = "Visa" in orig_name or "BRP" in orig_name or "Green Card" in orig_name
-            is_exam = "Exam" in orig_name or any(x in orig_name for x in ["SSC", "UPSC", "NEET", "JEE", "GATE", "PSC", "IBPS", "RRB"])
+            # c. Detect Type and Hierarchy
+            is_visa = "Visa" in orig_name or "BRP" in orig_name or "Green Card" in orig_name or "Residence Permit" in orig_name
+            is_exam = "Exam" in orig_name or any(x in orig_name for x in ["SSC", "UPSC", "NEET", "JEE", "GATE", "PSC", "IBPS", "RRB", "KPSC", "TNPSC"])
             
-            # Handle India Exam hierarchies specifically
             exam_state = None
             exam_org = None
+            
             if is_exam and c_name == "India":
-                if "TNPSC" in orig_name or "Tamil Nadu" in orig_name:
-                    exam_state = "Tamil Nadu"
-                    exam_org = "TNPSC"
-                elif "KPSC" in orig_name or "Kerala" in orig_name:
-                    exam_state = "Kerala"
-                    exam_org = "KPSC"
-                elif "SSC" in orig_name:
+                # Detect state
+                for state in indian_states:
+                    if state.lower() in orig_name.lower():
+                        exam_state = state
+                        break
+                
+                # Common organizations
+                if "TNPSC" in orig_name: exam_org = "TNPSC"
+                elif "KPSC" in orig_name: exam_org = "KPSC"
+                elif "SSC" in orig_name: exam_org = "SSC"
+                elif "UPSC" in orig_name: exam_org = "UPSC"
+                elif "Bank" in orig_name or "IBPS" in orig_name: exam_org = "IBPS"
+                elif "Railway" in orig_name or "RRB" in orig_name: exam_org = "RRB"
+                
+                if not exam_state and not exam_org:
                     exam_state = "Central"
-                    exam_org = "SSC"
-                elif "UPSC" in orig_name:
+                    exam_org = "Standard"
+                elif not exam_state:
                     exam_state = "Central"
-                    exam_org = "UPSC"
-                # Add more as needed...
             
             if is_visa:
                 exam_org = "Visa"
             
-            # Update the rule
+            # d. Update Model Fields
             rule.country = clean_doc_name
             rule.exam_country = c_name
             rule.flag_emoji = flags.get(c_name, "🏳️")
@@ -116,31 +108,61 @@ class Command(BaseCommand):
             rule.exam_state = exam_state
             rule.exam_organization = exam_org
             
-            # Slugs
+            # e. SEO-Compliant Slugs
+            # High quality slugs: "india-passport-photo-maker"
             if is_visa:
-                rule.slug = slugify(f"{c_name} {clean_doc_name}")
+                target_slug = slugify(f"{c_name} {clean_doc_name} photo maker")
             elif is_exam:
-                rule.slug = slugify(f"{exam_org or ''} {clean_doc_name} {c_name}")
+                target_slug = slugify(f"{exam_org or ''} {clean_doc_name} {c_name} photo maker")
             else:
-                rule.slug = slugify(f"{c_name} {clean_doc_name}")
+                target_slug = slugify(f"{c_name} {clean_doc_name} photo maker")
 
-            # Safety check: if Custom Size, keep its special slug
+            # Handle Custom Size special case
             if "Custom Size" in orig_name:
-                rule.slug = "custom-size-passport-photo"
+                target_slug = "custom-size-passport-photo"
                 rule.country = "Custom Size"
                 rule.exam_country = "Global"
 
-            if rule.slug in seen_slugs:
-                self.stdout.write(f"Deleting duplicate: {rule.slug}")
+            if target_slug in seen_slugs:
+                self.stdout.write(f"Merging duplicate: {target_slug}")
                 rule.delete()
                 continue
             
-            seen_slugs.add(rule.slug)
+            rule.slug = target_slug
+            seen_slugs.add(target_slug)
+
+            # f. STRICT SEO Meta Tags (55-60 titles, 155-160 descs)
+            title_name = f"{c_name} {clean_doc_name}"
             
-            # Clean meta fields if they became ugly
-            rule.h1 = f"{c_name} {clean_doc_name} Photo Maker"
-            rule.meta_title = f"{c_name} {clean_doc_name} Photo Size & Maker"
+            # Title Generation (Goal: 55-60)
+            title = f"Free {title_name} Photo Maker – Compliant Tool Online"
+            if len(title) < 55: title = f"Free {title_name} Photo Maker – AI Compliant Tool Online"
+            if len(title) > 60: title = f"{title_name} Photo Maker – Official AI Tool Online"
+            rule.meta_title = title[:60].strip()
             
+            # Description Generation (Goal: 155-160)
+            size_str = f"{rule.width_mm}x{rule.height_mm}mm"
+            desc = f"Create official {title_name} photos ({size_str}) instantly with our free AI photo maker. 100% compliant with latest standards and requirements for 2026 today!"
+            if len(desc) < 155: desc = f"Create official {title_name} photos ({size_str}) instantly with our free AI photo maker tool. 100% compliant with latest official standards and requirements for 2026!"
+            rule.meta_description = desc[:160].strip()
+
             rule.save()
 
-        self.stdout.write(self.style.SUCCESS("Success: Cleaned and Categorized!"))
+        # 5. Optimize Static Pages too
+        static_pages = {
+            '/': {
+                'title': 'Free Passport Photo Maker – AI Tool for 100+ Countries',
+                'description': 'Create compliant passport photos for 100+ countries instantly with our free AI passport photo maker tool. Fast, secure, professional results for everyone now!',
+            },
+            '/image-converter/': {
+                'title': 'Free Image Converter – Convert JPG, PNG, WebP & All Now',
+                'description': 'Convert images between JPG, PNG, WebP, HEIC, and BMP formats instantly with our free image converter tool. Fast, secure, high-quality conversion online today!',
+            }
+        }
+        for path, meta in static_pages.items():
+            pm, _ = PageMeta.objects.get_or_create(path=path)
+            pm.title = meta['title']
+            pm.description = meta['description']
+            pm.save()
+
+        self.stdout.write(self.style.SUCCESS("Master Cleanup and SEO Optimization finished!"))
