@@ -1,0 +1,29 @@
+name: snapfixer
+services:
+  - name: web
+    type: docker
+    imageUri: .
+    ports:
+      - port: 8000
+        protocol: http
+    env:
+      - key: DEBUG
+        value: "0"
+      - key: ALLOWED_HOSTS
+        value: "*" # Update with your domain later
+      - key: PORT
+        value: "8000"
+    instance_type: nano
+    health_checks:
+      - http:
+          path: /
+          port: 8000
+    regions:
+      - fra # Frankfurt is usually good, or pick one closer to you
+  - name: worker
+    type: docker
+    imageUri: .
+    command: celery -A validphoto worker -l info --pool=solo
+    instance_type: nano
+    regions:
+      - fra

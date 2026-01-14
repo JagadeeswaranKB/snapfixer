@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - SnapFixer{% endblock %}
+
+{% block content %}
+<div
+    class="max-w-4xl mx-auto prose prose-blue prose-lg bg-white p-10 rounded-[2rem] shadow-sm dark:bg-gray-800 dark:prose-invert">
+    <!-- Breadcrumbs -->
+    <nav class="text-sm font-sans mb-8 no-prose text-gray-500 dark:text-gray-400">
+        <a href="/" class="hover:text-blue-600 transition-colors">Home</a> /
+        <span class="text-gray-900 dark:text-white font-medium">Privacy Policy</span>
+    </nav>
+    <h1>Privacy Policy</h1>
+    <p class="lead">At SnapFixer, we take your privacy extremely seriously. We operate on a "zero-knowledge" basis
+        wherever possible.</p>
+
+    <h3>1. Image Processing</h3>
+    <p>When you upload a photo to SnapFixer, it is processed either directly in your browser or on our secure,
+        ephemeral servers.
+        <strong>We do not permanently store your photos.</strong> Once your passport photo is generated and downloaded,
+        the original and processed files are automatically deleted from our system within minutes.
+    </p>
+
+    <h3>2. Data Collection</h3>
+    <p>We do not collect personal identification information (PII) such as your name, address, or phone number unless
+        you voluntarily provide it (e.g., via our contact form). We may collect anonymous usage statistics to improve
+        our service.</p>
+
+    <h3>3. Cookies and Advertising</h3>
+    <p>We use local storage technology to save your preferences (such as your last selected country) to enhance your
+        user experience.</p>
+    <p>We may use third-party advertising companies to serve ads when you visit our website (e.g., Google AdSense).
+        These companies may use information about your visits to this and other websites in order to provide
+        advertisements about goods and services of interest to you. Specifically, Google's use of advertising cookies
+        enables it and its partners to serve ads to you based on your visit to this site and/or other sites on the
+        Internet.</p>
+    <p>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads"
+            target="_blank" rel="noopener">Ads Settings</a>.</p>
+
+    <h3>4. Changes to This Policy</h3>
+    <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy
+        Policy on this page.</p>
+
+    <div class="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm dark:bg-blue-900/20 dark:border-blue-800">
+        <strong>Last updated:</strong> January 2026
+    </div>
+</div>
+{% endblock %}

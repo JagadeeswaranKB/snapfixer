@@ -1,0 +1,539 @@
+[
+  {
+    "country_code": "IN",
+    "country_name": "India",
+    "documents": [
+      {
+        "name": "Indian Passport",
+        "category": "Passport",
+        "width_mm": 50,
+        "height_mm": 50,
+        "bg_color": "white",
+        "special_instruction": "Face should cover 70-80% of photo"
+      },
+      {
+        "name": "UPSC Civil Services",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "min_kb": 20,
+        "max_kb": 200,
+        "bg_color": "white",
+        "special_instruction": "Recent photo (within 10 days of notification start)"
+      },
+      {
+        "name": "SSC (CGL, CHSL, MTS)",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "min_kb": 20,
+        "max_kb": 50,
+        "bg_color": "white",
+        "special_instruction": "Both ears must be visible; No spectacles/cap"
+      },
+      {
+        "name": "NEET (UG) - Passport Size",
+        "category": "Education",
+        "width_inch": 2.5,
+        "height_inch": 3.5,
+        "min_kb": 10,
+        "max_kb": 200,
+        "bg_color": "white",
+        "special_instruction": "Name and Date required below chin",
+        "requires_name_date_overlay": true
+      },
+      {
+        "name": "NEET (UG) - Postcard Size",
+        "category": "Education",
+        "width_inch": 4,
+        "height_inch": 6,
+        "min_kb": 10,
+        "max_kb": 200,
+        "bg_color": "white",
+        "special_instruction": "High quality 4x6 inch photo; Name and Date required",
+        "requires_name_date_overlay": true
+      },
+      {
+        "name": "JEE Main",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "min_kb": 10,
+        "max_kb": 200,
+        "bg_color": "white",
+        "special_instruction": "80% face coverage; White background mandatory"
+      },
+      {
+        "name": "GATE",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "min_kb": 5,
+        "max_kb": 200,
+        "bg_color": "white",
+        "special_instruction": "60-70% face coverage; Recent professional photo"
+      },
+      {
+        "name": "IBPS PO/Clerk",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "min_kb": 20,
+        "max_kb": 50,
+        "bg_color": "white",
+        "special_instruction": "Prefer 200x230 pixels for clarity"
+      },
+      {
+        "name": "Indian Railway (RRB)",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "min_kb": 20,
+        "max_kb": 50,
+        "bg_color": "white",
+        "special_instruction": "Professional studio photo required; Recent"
+      },
+      {
+        "name": "TNPSC (Tamil Nadu)",
+        "category": "Education",
+        "width_px": 311,
+        "height_px": 311,
+        "max_kb": 50,
+        "bg_color": "white",
+        "special_instruction": "Name and Date of photo required at bottom",
+        "requires_name_date_overlay": true
+      },
+      {
+        "name": "KPSC (Kerala)",
+        "category": "Education",
+        "width_px": 150,
+        "height_px": 200,
+        "max_kb": 30,
+        "bg_color": "white",
+        "special_instruction": "Name and Date of photo required at bottom",
+        "requires_name_date_overlay": true
+      },
+      {
+        "name": "APPSC (Andhra Pradesh)",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "max_kb": 50,
+        "bg_color": "white",
+        "special_instruction": "Clear color passport size photo"
+      },
+      {
+        "name": "TSPSC (Telangana)",
+        "category": "Education",
+        "width_px": 125,
+        "height_px": 165,
+        "min_kb": 20,
+        "max_kb": 50,
+        "bg_color": "white",
+        "special_instruction": "Name and Date required on photo",
+        "requires_name_date_overlay": true
+      },
+      {
+        "name": "UPPSC (Uttar Pradesh)",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "min_kb": 20,
+        "max_kb": 50,
+        "bg_color": "white",
+        "special_instruction": "Face should cover 50-60% of area"
+      },
+      {
+        "name": "MPSC (Maharashtra)",
+        "category": "Education",
+        "width_px": 125,
+        "height_px": 150,
+        "max_kb": 50,
+        "bg_color": "white",
+        "special_instruction": "Full face view; No shadows"
+      },
+      {
+        "name": "WBPSC (West Bengal)",
+        "category": "Education",
+        "width_px": 138,
+        "height_px": 177,
+        "max_kb": 100,
+        "bg_color": "white",
+        "special_instruction": "70-80% face coverage"
+      },
+      {
+        "name": "RPSC (Rajasthan)",
+        "category": "Education",
+        "width_mm": 35,
+        "height_mm": 45,
+        "min_kb": 50,
+        "max_kb": 100,
+        "bg_color": "white",
+        "special_instruction": "Latest color photo (max 1 month old)"
+      },
+      {
+        "name": "GPSC (Gujarat)",
+        "category": "Education",
+        "width_px": 130,
+        "height_px": 180,
+        "max_kb": 15,
+        "bg_color": "white"
+      },
+      {
+        "name": "BPSC (Bihar)",
+        "category": "Education",
+        "width_px": 250,
+        "height_px": 250,
+        "max_kb": 25,
+        "bg_color": "white",
+        "special_instruction": "Clear frontal view; Square format"
+      }
+    ]
+  },
+  {
+    "country_code": "US",
+    "country_name": "USA",
+    "documents": [
+      {
+        "name": "US Passport / Visa",
+        "category": "Passport",
+        "width_inch": 2,
+        "height_inch": 2,
+        "bg_color": "white",
+        "special_instruction": "Head must be 1-1.375 inches; No glasses allowed"
+      },
+      {
+        "name": "Diversity Visa (Green Card Lottery)",
+        "category": "Visa",
+        "width_px": 600,
+        "height_px": 600,
+        "max_kb": 240,
+        "bg_color": "white",
+        "special_instruction": "Must be square; 600x600 pixels minimum"
+      }
+    ]
+  },
+  {
+    "country_code": "GB",
+    "country_name": "UK",
+    "documents": [
+      {
+        "name": "UK Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "cream",
+        "special_instruction": "Background must be cream or light grey; No white"
+      },
+      {
+        "name": "UK Student Visa",
+        "category": "Visa",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "cream"
+      }
+    ]
+  },
+  {
+    "country_code": "CA",
+    "country_name": "Canada",
+    "documents": [
+      {
+        "name": "Canada Passport",
+        "category": "Passport",
+        "width_mm": 50,
+        "height_mm": 70,
+        "bg_color": "white",
+        "special_instruction": "Face height 31-36mm; Stamp/Date required on back"
+      },
+      {
+        "name": "Canada Visa / PR Card",
+        "category": "Visa",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "AU",
+    "country_name": "Australia",
+    "documents": [
+      {
+        "name": "Australia Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white",
+        "special_instruction": "Face width 32-36mm; No glasses"
+      },
+      {
+        "name": "Australia Visa",
+        "category": "Visa",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "EU",
+    "country_name": "Schengen Area",
+    "documents": [
+      {
+        "name": "Schengen Visa",
+        "category": "Visa",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "lightgrey",
+        "special_instruction": "Head should cover 70-80% of photo"
+      }
+    ]
+  },
+  {
+    "country_code": "AE",
+    "country_name": "UAE",
+    "documents": [
+      {
+        "name": "UAE Visa / Emirates ID",
+        "category": "Visa",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white",
+        "special_instruction": "High resolution required (600 dpi)"
+      }
+    ]
+  },
+  {
+    "country_code": "SA",
+    "country_name": "Saudi Arabia",
+    "documents": [
+      {
+        "name": "Saudi Visa / Umrah",
+        "category": "Visa",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white",
+        "special_instruction": "No white clothing to avoid blending with background"
+      }
+    ]
+  },
+  {
+    "country_code": "SG",
+    "country_name": "Singapore",
+    "documents": [
+      {
+        "name": "Singapore Passport / PR",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white",
+        "max_kb": 60,
+        "special_instruction": "Taken within last 3 months"
+      }
+    ]
+  },
+  {
+    "country_code": "PK",
+    "country_name": "Pakistan",
+    "documents": [
+      {
+        "name": "Pakistan Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "BD",
+    "country_name": "Bangladesh",
+    "documents": [
+      {
+        "name": "Bangladesh Passport",
+        "category": "Passport",
+        "width_mm": 45,
+        "height_mm": 55,
+        "bg_color": "white"
+      },
+      {
+        "name": "Bangladesh e-Passport",
+        "category": "Passport",
+        "width_mm": 25,
+        "height_mm": 30,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "LK",
+    "country_name": "Sri Lanka",
+    "documents": [
+      {
+        "name": "Sri Lanka Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "NP",
+    "country_name": "Nepal",
+    "documents": [
+      {
+        "name": "Nepal Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "PH",
+    "country_name": "Philippines",
+    "documents": [
+      {
+        "name": "Philippines Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "royal_blue",
+        "special_instruction": "Royal blue background required"
+      }
+    ]
+  },
+  {
+    "country_code": "MY",
+    "country_name": "Malaysia",
+    "documents": [
+      {
+        "name": "Malaysia Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 50,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "ID",
+    "country_name": "Indonesia",
+    "documents": [
+      {
+        "name": "Indonesia Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "TH",
+    "country_name": "Thailand",
+    "documents": [
+      {
+        "name": "Thailand Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "CN",
+    "country_name": "China",
+    "documents": [
+      {
+        "name": "China Passport",
+        "category": "Passport",
+        "width_mm": 33,
+        "height_mm": 48,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "JP",
+    "country_name": "Japan",
+    "documents": [
+      {
+        "name": "Japan Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "KR",
+    "country_name": "South Korea",
+    "documents": [
+      {
+        "name": "South Korea Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "BR",
+    "country_name": "Brazil",
+    "documents": [
+      {
+        "name": "Brazil Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "MX",
+    "country_name": "Mexico",
+    "documents": [
+      {
+        "name": "Mexico Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "RU",
+    "country_name": "Russia",
+    "documents": [
+      {
+        "name": "Russia Passport",
+        "category": "Passport",
+        "width_mm": 35,
+        "height_mm": 45,
+        "bg_color": "white"
+      }
+    ]
+  },
+  {
+    "country_code": "TR",
+    "country_name": "Turkey",
+    "documents": [
+      {
+        "name": "Turkey Passport",
+        "category": "Passport",
+        "width_mm": 50,
+        "height_mm": 60,
+        "bg_color": "white"
+      }
+    ]
+  }
+]

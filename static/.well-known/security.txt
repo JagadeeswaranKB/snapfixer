@@ -1,0 +1,11 @@
+Contact: mailto:security@validphoto.com
+Expires: 2027-01-11T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://validphoto.com/.well-known/security.txt
+
+# Security Policy
+# We take security seriously. If you discover a security vulnerability,
+# please report it responsibly to security@validphoto.com
+
+# Acknowledgments
+# We appreciate security researchers who help keep ValidPhoto secure.

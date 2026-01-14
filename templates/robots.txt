@@ -1,0 +1,22 @@
+User-agent: *
+Disallow: /secure-portal/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*?*print=
+Disallow: /*?*share=
+Allow: /static/
+Allow: /media/
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://validphoto.com/sitemap.xml
+
+# Special rules for specific bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /static/
+Allow: /media/

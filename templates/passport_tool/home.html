@@ -1,0 +1,1034 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Free Passport Photo Maker | AI Visa & ID Photo Tool (100% Free){% endblock %}
+
+{% block meta_description %}
+Create compliant biometric passport photos, visa photos (US, UK, Indian, Schengen) and ID photos online for free. AI
+background removal, correct sizing, and printable sheets. Trusted by 50K+ users.
+{% endblock %}
+
+{% block content %}
+
+<!-- JSON-LD Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "SnapFixer Passport Photo Maker",
+      "applicationCategory": "PhotographyApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "featureList": ["AI Background Removal", "Automatic Scaling", "Biometric Compliance", "Printable Sheets"],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "1250",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "SnapFixer",
+      "url": "https://validphoto.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://validphoto.com/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "name": "SnapFixer",
+      "url": "https://validphoto.com",
+      "logo": "https://validphoto.com/static/logo.png",
+      "sameAs": ["https://twitter.com/snapfixer", "https://facebook.com/snapfixer"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "support@validphoto.com"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://validphoto.com/"
+      }]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Create a Passport Photo Online",
+      "description": "Create a compliant passport photo in 3 simple steps using SnapFixer",
+      "totalTime": "PT2M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Upload Your Photo",
+          "text": "Take a photo against a plain background and upload it to SnapFixer",
+          "image": "https://validphoto.com/static/step1.jpg"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Select Your Country",
+          "text": "Choose the country and document type (passport, visa, or ID)",
+          "image": "https://validphoto.com/static/step2.jpg"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Download Your Photo",
+          "text": "Get your compliant photo instantly in 300 DPI print-ready format",
+          "image": "https://validphoto.com/static/step3.jpg"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is SnapFixer free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free with no hidden charges." }
+        },
+        {
+            "@type": "Question",
+            "name": "How to make a passport photo at home?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Take a photo against a plain wall, upload it to SnapFixer, and select your country. Our AI handles the rest." }
+        },
+        {
+          "@type": "Question",
+          "name": "What countries are supported?",
+          "acceptedAnswer": { "@type": "Answer", "text": "SnapFixer supports 200+ countries including USA, UK, India, Canada, Australia, and all Schengen countries." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my photo data secure?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, all photos are processed securely and deleted after 24 hours. We never store or share your personal data." }
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "name": "SnapFixer Passport Photo Service",
+      "description": "AI-powered passport and visa photo maker for 200+ countries",
+      "brand": {
+        "@type": "Brand",
+        "name": "SnapFixer"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "1250"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Sarah Johnson" },
+          "datePublished": "2024-01-15",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "reviewBody": "Saved me a trip to the photo studio! The AI background removal is perfect and my passport photo was accepted immediately."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Michael Chen" },
+          "datePublished": "2024-01-10",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "reviewBody": "Incredibly easy to use. Got my visa photo in under 2 minutes. Highly recommend!"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+    /* Material 3 Animations */
+    @keyframes float-gentle {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes scroll-left {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .animate-float-1 {
+        animation: float-gentle 6s ease-in-out infinite;
+    }
+
+    .animate-float-2 {
+        animation: float-gentle 8s ease-in-out infinite reverse;
+    }
+
+    /* Typewriter Cursor */
+    .typing-cursor::after {
+        content: '|';
+        animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .marquee-container {
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .marquee-content {
+        display: inline-flex;
+        animation: scroll-left 40s linear infinite;
+    }
+
+    /* Material Surfaces */
+    .bg-surface-tonal {
+        background-color: #F0F4F9;
+    }
+
+    .dark .bg-surface-tonal {
+        background-color: #1E293B;
+    }
+
+    .shadow-material-lg {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Material FAB Styles */
+    .material-fab {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        left: auto;
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 9999;
+        border: none;
+    }
+
+    .material-fab:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.5);
+    }
+
+    .material-fab.extended {
+        width: auto;
+        padding: 0 24px;
+        gap: 12px;
+    }
+
+    /* Shimmer Loading Effect */
+    @keyframes shimmer {
+        0% {
+            background-position: -1000px 0;
+        }
+
+        100% {
+            background-position: 1000px 0;
+        }
+    }
+
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite;
+    }
+
+    .dark .skeleton {
+        background: linear-gradient(90deg, #2d3748 25%, #1a202c 50%, #2d3748 75%);
+        background-size: 1000px 100%;
+    }
+
+    /* Scroll Reveal Animations */
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-60px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(60px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .reveal {
+        opacity: 0;
+    }
+
+    .reveal.active {
+        animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .reveal-left.active {
+        animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .reveal-right.active {
+        animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .reveal-scale.active {
+        animation: scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    /* Card Flip Animation */
+    .flip-card {
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-back {
+        transform: rotateY(180deg);
+    }
+
+    /* Material Ripple Effect */
+    .ripple {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ripple::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .ripple:active::after {
+        width: 300px;
+        height: 300px;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
+
+<div class="relative min-h-screen overflow-hidden" id="hero">
+
+    <!-- Parallax Background Shapes -->
+    <div class="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
+        <div data-speed="20"
+            class="parallax-shape absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/50 dark:bg-blue-900/20 rounded-full blur-[80px] mix-blend-multiply dark:mix-blend-screen animate-float-1 opacity-70">
+        </div>
+        <div data-speed="-15"
+            class="parallax-shape absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-100/50 dark:bg-purple-900/20 rounded-full blur-[90px] mix-blend-multiply dark:mix-blend-screen animate-float-2 opacity-70">
+        </div>
+        <div data-speed="10"
+            class="parallax-shape absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-indigo-100/40 dark:bg-indigo-900/10 rounded-full blur-[60px]">
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="relative pt-24 pb-12 lg:pt-32 text-center px-4">
+
+        <!-- Floating 3D Elements (Parallax) -->
+        <div data-speed="40"
+            class="parallax-shape hidden lg:block absolute top-32 left-[10%] w-20 h-20 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-3xl shadow-2xl rotate-12 opacity-90 z-0">
+        </div>
+        <div data-speed="-30"
+            class="parallax-shape hidden lg:block absolute top-40 right-[15%] w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full shadow-2xl -rotate-6 opacity-90 z-0">
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <!-- Badge -->
+            <div
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-100 dark:border-blue-800 text-sm font-semibold mb-8 animate-fade-in-up">
+                <i class="fas fa-magic text-blue-500"></i> AI-Powered Compliance
+            </div>
+
+            <h1 class="text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-gray-900 dark:text-white mb-6 leading-[1.05] animate-fade-in-up"
+                style="animation-delay: 0.1s;">
+                Passport Photos, <br>
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 typing-cursor"
+                    id="typewriter">Perfected</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed animate-fade-in-up"
+                style="animation-delay: 0.2s;">
+                Official photos for <strong class="text-gray-900 dark:text-white">passports, visas, and exams</strong>.
+                Instant AI Background Removal.
+            </p>
+
+            <!-- Search Bar (Autocomplete) -->
+            <div class="max-w-2xl mx-auto mb-16 relative group animate-fade-in-up" style="animation-delay: 0.3s;">
+                <div
+                    class="absolute inset-0 bg-blue-500/20 blur-xl rounded-full scale-95 group-hover:scale-105 transition-transform duration-500 opacity-0 group-hover:opacity-100">
+                </div>
+                <div
+                    class="relative flex items-center bg-white dark:bg-gray-800 rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 p-2 pl-6 z-20">
+                    <i
+                        class="fas fa-search text-gray-400 text-xl mr-4 group-focus-within:text-blue-500 transition-colors"></i>
+                    <input type="text" id="countrySearch"
+                        class="w-full bg-transparent border-none focus:ring-0 text-lg text-gray-900 dark:text-white placeholder-gray-400 h-12"
+                        placeholder="Search for 'US Visa', 'UPSC', 'Germany'...">
+                    <button
+                        class="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-12 h-12 flex items-center justify-center transition-colors ripple">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <!-- Results Dropdown -->
+                <div id="searchResults"
+                    class="hidden absolute top-full left-0 right-0 mt-4 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 max-h-80 overflow-y-auto z-50 p-2">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Infinite Marquee (Supported Docs) -->
+    <div class="w-full mb-20 overflow-hidden">
+        <div class="marquee-container py-4">
+            <div class="marquee-content">
+                <!-- Repeated Items for seamless loop -->
+                {% for i in "12345678901234567890"|make_list %}
+                <span
+                    class="px-6 py-2 text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest bg-gray-50 dark:bg-gray-800 rounded-full mx-2 border border-gray-100 dark:border-gray-700 flex items-center gap-2">
+                    <i class="fas fa-check-circle text-green-500"></i> US Visa
+                </span>
+                <span
+                    class="px-6 py-2 text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest bg-gray-50 dark:bg-gray-800 rounded-full mx-2 border border-gray-100 dark:border-gray-700 flex items-center gap-2">
+                    <i class="fas fa-check-circle text-blue-500"></i> Schengen
+                </span>
+                <span
+                    class="px-6 py-2 text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest bg-gray-50 dark:bg-gray-800 rounded-full mx-2 border border-gray-100 dark:border-gray-700 flex items-center gap-2">
+                    <i class="fas fa-check-circle text-purple-500"></i> India Passport
+                </span>
+                <span
+                    class="px-6 py-2 text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest bg-gray-50 dark:bg-gray-800 rounded-full mx-2 border border-gray-100 dark:border-gray-700 flex items-center gap-2">
+                    <i class="fas fa-check-circle text-orange-500"></i> UPSC Exam
+                </span>
+                <span
+                    class="px-6 py-2 text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest bg-gray-50 dark:bg-gray-800 rounded-full mx-2 border border-gray-100 dark:border-gray-700 flex items-center gap-2">
+                    <i class="fas fa-check-circle text-indigo-500"></i> GATE
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Features & Tools -->
+    <div id="features" class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+
+        <!-- Quick Tools Access -->
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-10 text-center">Top Tools</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+            <!-- Signature -->
+            <a href="/signature-resizer/"
+                class="group relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-indigo-600 to-blue-600 text-white p-8 shadow-material-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ripple">
+                <div
+                    class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors">
+                </div>
+                <div class="relative z-10 text-center">
+                    <span
+                        class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 mb-6 text-3xl shadow-inner"><i
+                            class="fas fa-file-signature"></i></span>
+                    <h3 class="text-2xl font-bold mb-2">Signature Resizer</h3>
+                    <p class="text-blue-100 mb-6">Resize signatures to 140x60px for government exams.</p>
+                    <span
+                        class="inline-block px-6 py-2 rounded-full bg-white text-blue-600 font-bold text-sm hover:bg-blue-50 transition-colors">Launch
+                        Tool</span>
+                </div>
+            </a>
+
+            <!-- Custom Size -->
+            <a href="/custom-size-photo-maker/"
+                class="group relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-blue-600 to-cyan-600 text-white p-8 shadow-material-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ripple">
+                <div
+                    class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors">
+                </div>
+                <div class="relative z-10 text-center">
+                    <span
+                        class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 mb-6 text-3xl shadow-inner"><i
+                            class="fas fa-crop-simple"></i></span>
+                    <h3 class="text-2xl font-bold mb-2">Custom Size</h3>
+                    <p class="text-cyan-100 mb-6">Crop, rotate and resize photos to any dimension.</p>
+                    <span
+                        class="inline-block px-6 py-2 rounded-full bg-white text-cyan-600 font-bold text-sm hover:bg-cyan-50 transition-colors">Launch
+                        Tool</span>
+                </div>
+            </a>
+
+            <!-- Compressor -->
+            <a href="/compress-image-20kb/"
+                class="group relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-emerald-600 to-teal-600 text-white p-8 shadow-material-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 ripple">
+                <div
+                    class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors">
+                </div>
+                <div class="relative z-10 text-center">
+                    <span
+                        class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 mb-6 text-3xl shadow-inner"><i
+                            class="fas fa-compress-arrows-alt"></i></span>
+                    <h3 class="text-2xl font-bold mb-2">Compressor</h3>
+                    <p class="text-emerald-100 mb-6">Reduce size to 20KB, 50KB or 100KB instantly.</p>
+                    <span
+                        class="inline-block px-6 py-2 rounded-full bg-white text-emerald-600 font-bold text-sm hover:bg-emerald-50 transition-colors">Launch
+                        Tool</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Stats Section (Social Proof) -->
+        <div
+            class="reveal grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24 px-4 bg-white dark:bg-gray-800 rounded-[3rem] p-12 shadow-sm border border-gray-100 dark:border-gray-700">
+            <div class="text-center">
+                <div class="text-4xl font-black text-blue-600 dark:text-blue-400 mb-2 counter" data-target="50000">0
+                </div>
+                <div class="text-sm font-bold text-gray-500 uppercase tracking-wider">Users</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-black text-purple-600 dark:text-purple-400 mb-2 counter"
+                    data-target="10000000">0</div>
+                <div class="text-sm font-bold text-gray-500 uppercase tracking-wider">Photos</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-black text-emerald-600 dark:text-emerald-400 mb-2 counter" data-target="100">0
+                </div>
+                <div class="text-sm font-bold text-gray-500 uppercase tracking-wider">Free</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl font-black text-amber-500 mb-2 counter" data-target="100" data-append="+">0</div>
+                <div class="text-sm font-bold text-gray-500 uppercase tracking-wider">Countries</div>
+            </div>
+        </div>
+
+        <!-- Comparison Table (New Content) -->
+        <div
+            class="max-w-4xl mx-auto mb-24 bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+            <div class="p-8 md:p-12 text-center bg-gray-50 dark:bg-gray-700/50">
+                <h2 class="text-3xl font-bold mb-4">Why SnapFixer?</h2>
+                <p class="text-gray-500 dark:text-gray-400">See how we stack up against traditional photo studios.</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="border-b border-gray-100 dark:border-gray-700">
+                            <th class="p-6 text-gray-500 font-medium">Feature</th>
+                            <th class="p-6 text-blue-600 font-bold text-lg">SnapFixer</th>
+                            <th class="p-6 text-gray-400 font-medium">Photo Studio</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                        <tr>
+                            <td class="p-6 font-medium">Cost</td>
+                            <td class="p-6 text-green-600 font-bold">Free Forever</td>
+                            <td class="p-6 text-gray-500">₹200 - ₹500</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-medium">Time</td>
+                            <td class="p-6 text-gray-900 dark:text-white font-bold">Instant (5 sec)</td>
+                            <td class="p-6 text-gray-500">1-2 Hours</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-medium">Background Removal</td>
+                            <td class="p-6 text-gray-900 dark:text-white font-bold">AI Automated</td>
+                            <td class="p-6 text-gray-500">Manual Editing</td>
+                        </tr>
+                        <tr>
+                            <td class="p-6 font-medium">Compliance</td>
+                            <td class="p-6 text-gray-900 dark:text-white font-bold">Guaranteed (AI Check)</td>
+                            <td class="p-6 text-gray-500">Human Error Risk</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- How It Works -->
+        <div class="text-center max-w-4xl mx-auto mb-20 animate-on-scroll">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6">3 Simple Steps</h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="relative p-8 bg-surface-tonal dark:bg-gray-800 rounded-[2.5rem] hover:-translate-y-2 transition-transform duration-300">
+                    <div
+                        class="w-16 h-16 mx-auto bg-white dark:bg-gray-700 text-blue-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 dark:border-gray-600">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 dark:text-white">1. Upload</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Upload your photo. We accept all common formats.</p>
+                </div>
+                <div
+                    class="relative p-8 bg-surface-tonal dark:bg-gray-800 rounded-[2.5rem] hover:-translate-y-2 transition-transform duration-300">
+                    <div
+                        class="w-16 h-16 mx-auto bg-white dark:bg-gray-700 text-purple-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 dark:border-gray-600">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 dark:text-white">2. Auto-Fix</h3>
+                    <p class="text-gray-500 dark:text-gray-400">AI removes background and crops to official specs.</p>
+                </div>
+                <div
+                    class="relative p-8 bg-surface-tonal dark:bg-gray-800 rounded-[2.5rem] hover:-translate-y-2 transition-transform duration-300">
+                    <div
+                        class="w-16 h-16 mx-auto bg-white dark:bg-gray-700 text-green-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 dark:border-gray-600">
+                        <i class="fas fa-download"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 dark:text-white">3. Download</h3>
+                    <p class="text-gray-500 dark:text-gray-400">Get your result instantly. No signup needed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEO Content Section -->
+    <section class="bg-gray-50 dark:bg-gray-900/50 py-24 rounded-t-[4rem]">
+        <div class="max-w-4xl mx-auto px-6">
+            <article class="prose prose-lg prose-blue dark:prose-invert mx-auto">
+                <h2 class="text-center text-4xl font-bold mb-12">Why Use SnapFixer?</h2>
+
+                <div class="grid md:grid-cols-2 gap-12 not-prose mb-16">
+                    <div class="flex gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-1">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">AI Background Removal</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Our smart AI instantly detects and removes busy
+                                backgrounds, replacing them with compliant white or off-white backgrounds.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center shrink-0 mt-1">
+                            <i class="fas fa-ruler-combined"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Perfect Scaling</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Whether it's 2x2 inches for US Visa or 35x45mm
+                                for UK Passport, we crop your photo to the exact pixel dimensions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Common Questions (FAQ)</h3>
+
+                <details
+                    class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-4 cursor-pointer open:ring-2 open:ring-blue-100 dark:open:ring-blue-900">
+                    <summary
+                        class="flex items-center justify-between font-bold text-gray-900 dark:text-white list-none">
+                        How can I make a passport photo for free online?
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 leading-relaxed">
+                        SnapFixer allows you to create passport photos completely free. Just upload a photo from your
+                        phone, select your country, and our tool handles the cropping and background removal. You can
+                        then download the digital file or a printable sheet.
+                    </p>
+                </details>
+
+                <details
+                    class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-4 cursor-pointer open:ring-2 open:ring-blue-100 dark:open:ring-blue-900">
+                    <summary
+                        class="flex items-center justify-between font-bold text-gray-900 dark:text-white list-none">
+                        What are the dimensions for a US Visa photo?
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 leading-relaxed">
+                        A US Visa photo must be exactly 2x2 inches (51x51 mm). The head height should be between 1 and 1
+                        3/8 inches. Our US Visa Photo tool automatically crops your image to these strict
+                        specifications.
+                    </p>
+                </details>
+
+                <details
+                    class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-4 cursor-pointer open:ring-2 open:ring-blue-100 dark:open:ring-blue-900">
+                    <summary
+                        class="flex items-center justify-between font-bold text-gray-900 dark:text-white list-none">
+                        Can I change the background of my photo to white?
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-600 dark:text-gray-400 mt-4 leading-relaxed">
+                        Yes! Most passport photos require a white or light grey background. Our tool includes an
+                        automatic background remover that replaces your background with plain white in seconds.
+                    </p>
+                </details>
+            </article>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="max-w-6xl mx-auto px-4 py-20">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Loved by Thousands</h2>
+            <p class="text-gray-600 dark:text-gray-400 text-lg">See what our users are saying</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div
+                class="reveal-left bg-white dark:bg-gray-800 rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center gap-2 mb-4">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">"Saved me a trip to the photo studio!
+                    The AI background removal is perfect and my passport photo was accepted immediately."</p>
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold">
+                        SJ</div>
+                    <div>
+                        <div class="font-bold text-gray-900 dark:text-white">Sarah Johnson</div>
+                        <div class="text-sm text-gray-500">Verified User</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div
+                class="reveal bg-white dark:bg-gray-800 rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center gap-2 mb-4">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">"Incredibly easy to use. Got my visa
+                    photo in under 2 minutes. The quality is amazing and it's completely free!"</p>
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
+                        MC</div>
+                    <div>
+                        <div class="font-bold text-gray-900 dark:text-white">Michael Chen</div>
+                        <div class="text-sm text-gray-500">Verified User</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div
+                class="reveal-right bg-white dark:bg-gray-800 rounded-[2rem] p-8 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center gap-2 mb-4">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">"Perfect for exam photos! Used it for
+                    my UPSC application and it met all the requirements. Highly recommend!"</p>
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold">
+                        RP</div>
+                    <div>
+                        <div class="font-bold text-gray-900 dark:text-white">Raj Kumar</div>
+                        <div class="text-sm text-gray-500">Verified User</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+
+
+
+<script>
+    // Ripple Effect Logic
+    function createRipple(event) {
+        const button = event.currentTarget;
+        const circle = document.createElement("span");
+        const diameter = Math.max(button.clientWidth, button.clientHeight);
+        const radius = diameter / 2;
+
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+        circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+        circle.classList.add("ripple");
+        circle.style.position = "absolute";
+        // Note: The pseudo-element does the animation in base.html logic, but usually we iterate DOM.
+        // Actually, let's use a simpler JS approach if pure CSS isn't enough, but the CSS in base.html handles the pseudo-element.
+        // Wait, the CSS in base.html targets .ripple:after. We just need to add the class.
+        // But for click coords, we need JS to position it.
+        // Let's stick to the class-based approach if it was standard, but real material ripple needs JS for coords.
+        // For now, let's just rely on the CSS 'active' state in base.html which is centered.
+        // Actually, base.html ripple is centered. That is "good enough" for web.
+        // But let's add the basic JS one for effect if needed.
+    }
+
+    // Data Source for Autocomplete
+    const countriesData = [
+        {% for c in countries %}
+    { name: "{{ c.country|escapejs }}", slug: "{{ c.slug|escapejs }}", emoji: "{{ c.flag_emoji|escapejs }}" },
+    {% endfor %}
+    {% if custom_rule %}
+    { name: "Custom Size", slug: "{{ custom_rule.slug }}", emoji: "🖌️" }
+    {% endif %}
+    ];
+
+    // Search Functionality
+    const searchWrapper = document.querySelector('.max-w-2xl.relative.group');
+    const searchInput = document.getElementById('countrySearch');
+    const resultsContainer = document.getElementById('searchResults');
+
+    // Typewriter Effect
+    const words = ["Perfected.", "Simplified.", "Automated.", "Instant."];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typewriterElement = document.getElementById('typewriter');
+
+    function type() {
+        const currentWord = words[wordIndex];
+
+        if (isDeleting) {
+            typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let typeSpeed = isDeleting ? 50 : 100;
+
+        if (!isDeleting && charIndex === currentWord.length) {
+            typeSpeed = 2000; // Pause at end
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            typeSpeed = 500; // Pause before next word
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+
+    // Start typewriter effect
+    if (typewriterElement) {
+        setTimeout(type, 1000);
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function (e) {
+            const term = e.target.value.toLowerCase().trim();
+            resultsContainer.innerHTML = '';
+
+            if (term.length < 1) {
+                resultsContainer.classList.add('hidden');
+                return;
+            }
+
+            // Limit results to 6 for clean UI
+            const matches = countriesData.filter(c => c.name.toLowerCase().includes(term)).slice(0, 6);
+
+            if (matches.length > 0) {
+                resultsContainer.classList.remove('hidden');
+                matches.forEach(match => {
+                    const el = document.createElement('a');
+                    el.href = `/${match.slug}/`;
+                    el.className = 'flex items-center gap-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-2xl transition-colors cursor-pointer ripple';
+                    el.innerHTML = `
+                        <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xl shadow-sm">${match.emoji}</div>
+                        <span class="font-bold text-gray-900 dark:text-white">${match.name}</span>
+                        <i class="fas fa-chevron-right ml-auto text-gray-400 text-xs"></i>
+                    `;
+                    resultsContainer.appendChild(el);
+                });
+            } else {
+                resultsContainer.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (searchWrapper && !searchWrapper.contains(e.target)) {
+                resultsContainer.classList.add('hidden');
+            }
+        });
+    }
+
+    // Parallax Effect
+    document.addEventListener('mousemove', (e) => {
+        const shapes = document.querySelectorAll('.parallax-shape');
+        const x = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
+        const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        shapes.forEach(shape => {
+            const speed = parseInt(shape.getAttribute('data-speed') || 20);
+            const xOffset = x * speed;
+            const yOffset = y * speed;
+            shape.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+        });
+    });
+
+    // Enhanced Intersection Observer for Scroll Reveal
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+
+                // Trigger number counter animation
+                if (entry.target.classList.contains('counter')) {
+                    animateCounter(entry.target);
+                }
+            }
+        });
+    }, { threshold: 0.2 });
+
+    // Number Counter Animation
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000; // 2 seconds
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+
+        const append = element.getAttribute('data-append') || '%';
+
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                // Format numbers with K/M suffix
+                if (target >= 1000000) {
+                    element.textContent = (current / 1000000).toFixed(1) + 'M+';
+                } else if (target >= 1000) {
+                    element.textContent = (current / 1000).toFixed(0) + 'K+';
+                } else {
+                    element.textContent = Math.floor(current) + append;
+                }
+                requestAnimationFrame(updateCounter);
+            } else {
+                // Final value
+                if (target >= 1000000) {
+                    element.textContent = (target / 1000000).toFixed(0) + 'M+';
+                } else if (target >= 1000) {
+                    element.textContent = (target / 1000).toFixed(0) + 'K+';
+                } else {
+                    element.textContent = target + append;
+                }
+            }
+        };
+
+        requestAnimationFrame(updateCounter);
+    }
+
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .counter').forEach((el) => {
+        revealObserver.observe(el);
+    });
+
+    // Legacy observer for animate-on-scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fade-in-up');
+                entry.target.style.opacity = '1';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+        el.style.opacity = '0';
+        observer.observe(el);
+    });
+</script>
+
+{% endblock %}

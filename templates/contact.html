@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Contact SnapFixer - Get Help with Passport & Visa Photos{% endblock %}
+{% block meta_description %}Contact SnapFixer support team for help with passport photos, visa photos, or exam photos.
+Fast response time, expert assistance. We're here to help you create compliant photos.{% endblock %}
+
+{% block og_title %}Contact SnapFixer - Customer Support{% endblock %}
+{% block og_description %}Need help with your passport or visa photo? Contact SnapFixer support team. Fast response,
+expert assistance available.{% endblock %}
+
+{% block twitter_title %}Contact SnapFixer{% endblock %}
+{% block twitter_description %}Get help with passport & visa photos. Contact SnapFixer support team.{% endblock %}
+
+{% block content %}
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "name": "Contact SnapFixer",
+      "description": "Get in touch with SnapFixer support team for help with passport, visa, and exam photos.",
+      "url": "https://validphoto.com/contact/"
+    },
+    {
+      "@type": "Organization",
+      "name": "SnapFixer",
+      "url": "https://validphoto.com",
+      "logo": "https://validphoto.com/static/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "support@validphoto.com",
+        "availableLanguage": ["English", "Hindi"]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://validphoto.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "https://validphoto.com/contact/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<div class="max-w-6xl mx-auto px-4 pt-32 pb-20">
+    <!-- Breadcrumbs -->
+    <nav class="mb-12 text-sm text-gray-600 dark:text-gray-400">
+        <a href="/" class="hover:text-blue-600">Home</a> /
+        <span class="text-gray-900 dark:text-white">Contact Us</span>
+    </nav>
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+
+        <!-- Left Side: Info & FAQ -->
+        <div class="animate-fade-in-up">
+            <h1 class="text-5xl font-black text-blue-900 mb-6 dark:text-white tracking-tight">Let's talk.</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-12 leading-relaxed">
+                Have a question about your photo or feedback on our tool? We'd love to hear from you.
+            </p>
+
+            <div class="space-y-8 mb-16">
+                <div
+                    class="flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0 dark:bg-blue-900 dark:text-blue-300">
+                        <i class="fas fa-headset text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-1">Customer Support</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-2">We are here to help. Fill out the form and we
+                            will get back to you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="border-t border-gray-100 pt-12 dark:border-gray-800">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 dark:text-white">Common Questions</h3>
+                <div class="space-y-4">
+                    <details
+                        class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 open:shadow-lg transition-all duration-300">
+                        <summary
+                            class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-gray-800 dark:text-gray-200">
+                            Is my photo data saved?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed">
+                            No. We process images in real-time. For browser-based tools, the image never leaves your
+                            device. For server-processed images, they are deleted immediately after processing.
+                        </div>
+                    </details>
+                    <details
+                        class="group bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 open:shadow-lg transition-all duration-300">
+                        <summary
+                            class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-gray-800 dark:text-gray-200">
+                            Is this service really free?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <div class="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed">
+                            Yes! Our core passport photo maker and resizing tools are completely free to use without
+                            watermarks.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Recent Form (Glass) -->
+        <div class="lg:sticky lg:top-24 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <!-- Success Message Alert -->
+            {% if messages %}
+            <div class="mb-8">
+                {% for message in messages %}
+                <div
+                    class="bg-green-50 border border-green-200 text-green-700 px-6 py-4 rounded-xl flex items-center gap-3 shadow-lg animate-bounce-in dark:bg-green-900/20 dark:border-green-800 dark:text-green-300">
+                    <i class="fas fa-check-circle text-xl"></i>
+                    <span class="font-medium">{{ message }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div
+                class="glass-card p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden dark:bg-gray-800/80 shadow-2xl border-2 border-white/50 dark:border-gray-700">
+                <!-- Floating Blobs -->
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2">
+                </div>
+
+                <form action="{% url 'contact' %}" method="POST" class="space-y-6 relative z-10" id="contactForm">
+                    {% csrf_token %}
+                    <input type="text" name="website" id="website"
+                        style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1"
+                        autocomplete="off">
+                    <input type="hidden" name="form_timestamp" id="form_timestamp" value="">
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="group">
+                            <label
+                                class="block text-sm font-bold text-gray-500 uppercase tracking-widest mb-2 dark:text-gray-400 group-focus-within:text-blue-600 transition-colors">Name</label>
+                            <input type="text" name="name" required aria-label="Your name"
+                                class="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-4 outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all dark:bg-gray-900/50 dark:border-gray-600 dark:text-white"
+                                placeholder="Your Name">
+                        </div>
+                        <div class="group">
+                            <label
+                                class="block text-sm font-bold text-gray-500 uppercase tracking-widest mb-2 dark:text-gray-400 group-focus-within:text-blue-600 transition-colors">Email</label>
+                            <input type="email" name="email" required aria-label="Your email address"
+                                class="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-4 outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all dark:bg-gray-900/50 dark:border-gray-600 dark:text-white"
+                                placeholder="hello@example.com">
+                        </div>
+                    </div>
+
+                    <div class="group">
+                        <label
+                            class="block text-sm font-bold text-gray-500 uppercase tracking-widest mb-2 dark:text-gray-400 group-focus-within:text-blue-600 transition-colors">Message</label>
+                        <textarea name="message" required rows="5" aria-label="Your message"
+                            class="w-full bg-gray-50/50 border border-gray-200 rounded-xl px-4 py-4 outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all dark:bg-gray-900/50 dark:border-gray-600 dark:text-white resize-none"
+                            placeholder="How can we help you?"></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn"
+                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold py-5 rounded-2xl hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-1 transition-all duration-300 dark:shadow-none disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span id="btnText">Send Message</span>
+                        <span id="btnLoading" class="hidden">
+                            <i class="fas fa-spinner fa-spin"></i> Sending...
+                        </span>
+                    </button>
+                    <p class="text-center text-xs text-gray-400 mt-4">Average response time: 24 hours</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('form_timestamp').value = Date.now();
+    const honeypot = document.getElementById('website');
+    if (honeypot) {
+        honeypot.addEventListener('input', function () {
+            this.value = '';
+        });
+    }
+
+    // Form loading state
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnLoading = document.getElementById('btnLoading');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function () {
+            submitBtn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+        });
+    }
+</script>
+{% endblock %}

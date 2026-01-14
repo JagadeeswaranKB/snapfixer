@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ================================================================= -->
+    <!-- GOOGLE SEARCH CONSOLE (VERIFICATION)                              -->
+    <!-- Paste your HTML Tag verification code below.                      -->
+    <!-- Example: <meta name="google-site-verification" content="..." />   -->
+    <!-- ================================================================= -->
+
+
+    <!-- ================================================================= -->
+    <!-- GOOGLE ANALYTICS 4 (MEASUREMENT ID)                               -->
+    <!-- Paste your Script below. It usually starts with <script async...> -->
+    <!-- ================================================================= -->
+
+    <title>
+        {% if page_meta.title %}
+        {{ page_meta.title }}
+        {% else %}
+        {% block title %}
+        {% if post.meta_title %}
+        {{ post.meta_title }}
+        {% elif country_rule.meta_title %}
+        {{ country_rule.meta_title }}
+        {% else %}
+        {{ title|default:site_settings.site_name }} - Free AI Passport Photo Maker
+        {% endif %}
+        {% endblock %}
+        {% endif %}
+    </title>
+    <meta name="description"
+        content="{% if page_meta.description %}{{ page_meta.description }}{% else %}{% block meta_description %}{% if post.meta_description %}{{ post.meta_description }}{% elif country_rule.meta_description %}{{ country_rule.meta_description }}{% elif meta_description %}{{ meta_description }}{% else %}Create compliant passport, visa, and ID photos for 100+ countries instantly. AI-powered, free to use, and secure. Download 300 DPI print-ready images.{% endif %}{% endblock %}{% endif %}">
+    <meta name="keywords"
+        content="{% if page_meta.keywords %}{{ page_meta.keywords }}{% elif post.meta_keywords %}{{ post.meta_keywords }}{% elif country_rule.meta_keywords %}{{ country_rule.meta_keywords }}{% elif meta_keywords %}{{ meta_keywords }}{% else %}passport photo, visa photo, id photo maker, free passport photo, biometric photo, ai photo tool, {{ site_settings.site_name|lower }}{% endif %}">
+    <meta name="author" content="{{ site_settings.site_name }} AI">
+    {% if site_settings.favicon %}
+    <link rel="icon" type="image/x-icon" href="{{ site_settings.favicon.url }}">
+    {% endif %}
+    <link rel="canonical"
+        href="{% if page_meta.canonical_url %}{{ page_meta.canonical_url }}{% elif post.canonical_url %}{{ post.canonical_url }}{% elif country_rule.canonical_url %}{{ country_rule.canonical_url }}{% else %}{{ canonical_url|default:request.build_absolute_uri }}{% endif %}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:title"
+        content="{% if page_meta.og_title %}{{ page_meta.og_title }}{% else %}{% block og_title %}{% if post.og_title %}{{ post.og_title }}{% elif country_rule.og_title %}{{ country_rule.og_title }}{% elif og_title %}{{ og_title }}{% elif title %}{{ title }}{% else %}{{ site_settings.site_name }} - Free AI Passport Photo Maker{% endif %}{% endblock %}{% endif %}">
+    <meta property="og:description"
+        content="{% if page_meta.og_description %}{{ page_meta.og_description }}{% else %}{% block og_description %}{% if post.og_description %}{{ post.og_description }}{% elif country_rule.og_description %}{{ country_rule.og_description }}{% elif og_description %}{{ og_description }}{% elif meta_description %}{{ meta_description }}{% else %}Convert your selfie into a compliant passport/visa photo for 200+ countries. Free, secure, and instant.{% endif %}{% endblock %}{% endif %}">
+    <meta property="og:image"
+        content="{% if page_meta.og_image %}{{ page_meta.og_image.url }}{% elif post.og_image %}{{ post.og_image.url }}{% elif country_rule.og_image %}{{ country_rule.og_image.url }}{% elif og_image %}{{ og_image.url }}{% else %}https://snapfixer.com/static/og-image.jpg{% endif %}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="{{ site_settings.site_name }}">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@snapfixer">
+    <meta name="twitter:creator" content="@snapfixer">
+    <meta name="twitter:title"
+        content="{% if page_meta.twitter_title %}{{ page_meta.twitter_title }}{% else %}{% block twitter_title %}{% if post.twitter_title %}{{ post.twitter_title }}{% elif country_rule.twitter_title %}{{ country_rule.twitter_title }}{% elif twitter_title %}{{ twitter_title }}{% elif title %}{{ title }}{% else %}{{ site_settings.site_name }} - Free AI Passport Photo Maker{% endif %}{% endblock %}{% endif %}">
+    <meta name="twitter:description"
+        content="{% if page_meta.twitter_description %}{{ page_meta.twitter_description }}{% else %}{% block twitter_description %}{% if post.twitter_description %}{{ post.twitter_description }}{% elif country_rule.twitter_description %}{{ country_rule.twitter_description }}{% elif twitter_description %}{{ twitter_description }}{% elif meta_description %}{{ meta_description }}{% else %}Convert your selfie into a compliant passport/visa photo for 200+ countries. Free, secure, and instant.{% endif %}{% endblock %}{% endif %}">
+    <meta name="twitter:image"
+        content="{% if page_meta.twitter_image %}{{ page_meta.twitter_image.url }}{% elif post.twitter_image %}{{ post.twitter_image.url }}{% elif country_rule.twitter_image %}{{ country_rule.twitter_image.url }}{% elif twitter_image %}{{ twitter_image.url }}{% else %}https://snapfixer.com/static/twitter-card.jpg{% endif %}">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <link rel="alternate" hreflang="en" href="{{ request.build_absolute_uri }}">
+    <meta name="theme-color" content="#6750A4">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    {% block schema %}
+    <!-- Generic Schema.org for SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "SnapFixer - Free AI Passport Photo Maker",
+      "operatingSystem": "All",
+      "applicationCategory": "MultimediaApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "AI-powered passport and visa photo maker for 100+ countries. Instant background removal and official compliance check.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "1250"
+      },
+      "author": {
+          "@type": "Organization",
+          "name": "SnapFixer AI",
+          "url": "https://snapfixer.com"
+      }
+    }
+    </script>
+    {% endblock %}
+
+    {% block extra_head %}{% endblock %}
+    <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' },
+                        secondary: { 500: '#8b5cf6', 600: '#7c3aed' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' },
+                        surface: '#f8fafc',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Material Ripple */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .ripple:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale(10, 10);
+            opacity: 0;
+            transition: transform .5s, opacity 1s;
+        }
+
+        .ripple:active:after {
+            transform: scale(0, 0);
+            opacity: .2;
+            transition: 0s;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Glassmorphism & Apple-like Blur */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow:
+                0 4px 6px -1px rgba(0, 0, 0, 0.05),
+                0 10px 15px -3px rgba(0, 0, 0, 0.03),
+                inset 0 0 20px rgba(255, 255, 255, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Mode Glass Override */
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.8) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
+            box-shadow:
+                0 10px 30px -10px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(255, 255, 255, 0.02) !important;
+        }
+
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.7);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Premium Shadows */
+        .shadow-premium {
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.03),
+                0 2px 4px rgba(0, 0, 0, 0.05),
+                0 12px 24px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .shadow-premium {
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .shadow-glow-blue {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Buttery Smooth Transitions */
+        .smooth-transition {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Mesh Background Animation */
+        @keyframes mesh {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-mesh {
+            background-size: 200% 200%;
+            animation: mesh 10s ease infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .fade-out-hint {
+            animation: fadeOut 4s forwards;
+            animation-delay: 2s;
+        }
+
+        /* Google Translate Hiding Top Bar & Branding */
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        .goog-logo-link {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0 !important;
+        }
+
+        .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            font-family: 'Inter', sans-serif !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 40px !important;
+        }
+
+        .goog-te-gadget-simple table,
+        .goog-te-gadget-simple tbody,
+        .goog-te-gadget-simple tr,
+        .goog-te-gadget-simple td {
+            display: contents !important;
+        }
+
+        .goog-te-gadget-simple span,
+        .goog-te-gadget-simple a {
+            color: #4b5563 !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 1rem !important;
+            font-weight: 500 !important;
+            display: flex !important;
+            align-items: center !important;
+            height: 40px !important;
+            line-height: normal !important;
+            vertical-align: middle !important;
+            text-decoration: none !important;
+        }
+
+        .goog-te-gadget-simple span:hover {
+            color: #2563eb !important;
+        }
+
+        .goog-te-gadget-icon {
+            display: none !important;
+        }
+
+        .dark .goog-te-gadget-simple span {
+            color: #D1D5DB !important;
+        }
+
+        .dark .goog-te-gadget-simple span:hover {
+            color: #60a5fa !important;
+        }
+
+        #google_translate_element {
+            display: flex !important;
+            align-items: center !important;
+            height: 40px !important;
+            overflow: hidden !important;
+        }
+
+        #google_translate_element_mobile {
+            display: flex !important;
+            align-items: center !important;
+            height: 40px !important;
+            overflow: hidden !important;
+        }
+
+        #google_translate_element_mobile .goog-te-gadget-simple {
+            background-color: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            font-family: 'Inter', sans-serif !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-start !important;
+            height: 40px !important;
+        }
+
+        /* Global Dark Mode Catch-all */
+        .dark body {
+            background-color: #111827 !important;
+            color: #f3f4f6 !important;
+        }
+
+        .dark h1,
+        .dark h2,
+        .dark h3,
+        .dark h4,
+        .dark h5,
+        .dark h6 {
+            color: #ffffff !important;
+        }
+
+        .dark p,
+        .dark li,
+        .dark label,
+        .dark span:not(.font-black) {
+            color: #d1d5db !important;
+        }
+
+        .dark .bg-white {
+            background-color: #1f2937 !important;
+        }
+
+        .dark .border-gray-100,
+        .dark .border-gray-50 {
+            border-color: #374151 !important;
+        }
+
+        .dark .bg-gray-50 {
+            background-color: #111827 !important;
+        }
+
+        /* Prevent Translate from pushing content down */
+        .skiptranslate {
+            position: relative;
+        }
+    </style>
+
+    <script>
+        // Check local storage for theme preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <!-- Google Search Console Verification -->
+    <!-- Replace 'Your-Verification-Code' with your actual code from GSC -->
+    <!-- <meta name="google-site-verification" content="Your-Verification-Code" /> -->
+
+    <!-- Google Analytics 4 (gtag.js) -->
+    <!-- Replace 'G-XXXXXXXXXX' with your actual Measurement ID -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <!-- Google AdSense - Auto Ads -->
+    <!-- Replace 'ca-pub-XXXXXXXXXXXXXXXX' with your actual AdSense Publisher ID -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+    <nav
+        class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300 dark:bg-gray-900/80 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-2 group">
+                    {% if site_settings.logo %}
+                    <img src="{{ site_settings.logo.url }}" alt="{{ site_settings.site_name }} Logo"
+                        class="h-10 w-auto group-hover:scale-110 transition duration-300">
+                    {% else %}
+                    <div
+                        class="w-10 h-10 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition duration-300">
+                        <i class="fas fa-passport text-xl"></i>
+                    </div>
+                    <span
+                        class="text-2xl font-black text-gray-900 tracking-tight group-hover:text-blue-600 transition dark:text-white">SnapFixer</span>
+                    {% endif %}
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/"
+                        class="text-gray-600 font-medium hover:text-blue-600 transition dark:text-gray-300 dark:hover:text-blue-400">Home</a>
+
+                    <!-- Photo Maker Megamenu -->
+                    <div class="relative group">
+                        <button
+                            class="flex items-center gap-1 text-gray-600 font-medium hover:text-blue-600 transition dark:text-gray-300 py-6">
+                            Photo Maker <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div
+                            class="absolute left-1/2 -translate-x-1/2 mt-0 w-[800px] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top p-6">
+                            <div class="grid grid-cols-3 gap-8">
+                                <!-- Column 1: By Country -->
+                                <div>
+                                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 px-4">By
+                                        Country</h3>
+                                    <div class="max-h-[60vh] overflow-y-auto custom-scrollbar pr-2 space-y-1">
+                                        {% if custom_size_rule %}
+                                        <a href="{% url 'tool_detail' slug=custom_size_rule.slug %}"
+                                            class="block px-4 py-2 text-sm font-bold text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg">
+                                            <i class="fas fa-expand mr-2"></i> Custom Size
+                                        </a>
+                                        {% endif %}
+                                        {% for country in nav_countries %}
+                                        <a href="{% url 'tool_detail' slug=country.slug %}"
+                                            class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                                            {{ country.flag_emoji }} {{ country.country }}
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <!-- Column 2: Exams -->
+                                <div>
+                                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 px-4">
+                                        Exams</h3>
+                                    <div class="max-h-[60vh] overflow-y-auto custom-scrollbar pr-2">
+                                        {% for country, data in exam_hierarchy.items %}
+                                        {% if country == 'India' %}
+                                        <details class="group/country" open>
+                                            <summary
+                                                class="flex items-center justify-between px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg cursor-pointer list-none">
+                                                <span>{{ country }}</span>
+                                                <i
+                                                    class="fas fa-chevron-down text-[10px] text-gray-400 group-open/country:rotate-180 transition-transform"></i>
+                                            </summary>
+                                            <div class="mt-1 space-y-1">
+                                                {% if data.orgs %}
+                                                {% for org, exams in data.orgs.items %}
+                                                <div class="pl-4 py-1">
+                                                    <p class="text-[10px] font-bold text-gray-400 uppercase mb-1">{{ org
+                                                        }}</p>
+                                                    {% for exam in exams %}
+                                                    <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                                        class="block px-4 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                                                        {{ exam.country }}
+                                                    </a>
+                                                    {% endfor %}
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
+
+                                                {% if data.states %}
+                                                {% for state, orgs in data.states.items %}
+                                                <details class="group/state pl-2">
+                                                    <summary
+                                                        class="flex items-center justify-between px-4 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg cursor-pointer list-none">
+                                                        <span>{{ state }}</span>
+                                                        <i
+                                                            class="fas fa-chevron-down text-[10px] text-gray-400 group-open/state:rotate-180 transition-transform"></i>
+                                                    </summary>
+                                                    <div class="mt-1 space-y-1">
+                                                        {% for org, exams in orgs.items %}
+                                                        <div class="pl-4 py-1">
+                                                            <p
+                                                                class="text-[10px] font-bold text-gray-400 uppercase mb-1">
+                                                                {{ org }}</p>
+                                                            {% for exam in exams %}
+                                                            <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                                                class="block px-4 py-1 text-xs text-gray-600 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                                                                {{ exam.country }}
+                                                            </a>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </details>
+                                                {% endfor %}
+                                                {% endif %}
+
+                                                {% if data.flat_exams %}
+                                                <div class="pl-2">
+                                                    {% for exam in data.flat_exams %}
+                                                    <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                                        class="block px-4 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                                                        {{ exam.country }}
+                                                    </a>
+                                                    {% endfor %}
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </details>
+                                        {% endif %}
+                                        {% endfor %}
+
+                                        <div
+                                            class="px-4 py-3 mt-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-dashed border-gray-200 dark:border-gray-700">
+                                            <p
+                                                class="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-tight">
+                                                <i class="fas fa-magic mr-1"></i> More to come
+                                            </p>
+                                            <p class="text-[10px] text-gray-500 mt-1 font-medium italic text-balance">We
+                                                are constantly adding new documents and countries.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Column 3: Visas -->
+                                <div>
+                                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 px-4">
+                                        Visas</h3>
+                                    <div class="max-h-[60vh] overflow-y-auto custom-scrollbar pr-2">
+                                        {% for country, data in visa_hierarchy.items %}
+                                        <details class="group/country">
+                                            <summary
+                                                class="flex items-center justify-between px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg cursor-pointer list-none">
+                                                <span>{{ country }}</span>
+                                                <i
+                                                    class="fas fa-chevron-down text-[10px] text-gray-400 group-open/country:rotate-180 transition-transform"></i>
+                                            </summary>
+                                            <div class="mt-1 space-y-1">
+                                                {% if data.orgs %}
+                                                {% for org, exams in data.orgs.items %}
+                                                <div class="pl-4 py-1">
+                                                    {% for exam in exams %}
+                                                    <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                                        class="block px-4 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                                                        {{ exam.country }}
+                                                    </a>
+                                                    {% endfor %}
+                                                </div>
+                                                {% endfor %}
+                                                {% endif %}
+
+                                                {% if data.flat_exams %}
+                                                <div class="pl-2">
+                                                    {% for exam in data.flat_exams %}
+                                                    <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                                        class="block px-4 py-1.5 text-xs text-gray-600 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                                                        {{ exam.country }}
+                                                    </a>
+                                                    {% endfor %}
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                        </details>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools Dropdown -->
+                    <div class="relative group">
+                        <button
+                            class="flex items-center gap-1 text-gray-600 font-medium hover:text-blue-600 transition dark:text-gray-300 py-6">
+                            Tools <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div
+                            class="absolute left-0 mt-0 w-64 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top-left">
+                            <div class="p-2 py-3 space-y-1">
+                                {% for tool in nav_tools %}
+                                <a href="{% url 'tool_detail' slug=tool.slug %}"
+                                    class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                                    {{ tool.country }}
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <a href="{% url 'about' %}"
+                        class="text-gray-600 font-medium hover:text-blue-600 transition dark:text-gray-300 dark:hover:text-blue-400">About
+                        Us</a>
+                    <a href="{% url 'contact' %}"
+                        class="text-gray-600 font-medium hover:text-blue-600 transition dark:text-gray-300 dark:hover:text-blue-400">Contact</a>
+
+
+                    <!-- Google Translate Widget -->
+                    <div id="google_translate_element"></div>
+
+                    <!-- Dark Mode Toggle -->
+                    <button id="theme-toggle"
+                        class="p-2 text-gray-500 rounded-lg hover:text-blue-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition">
+                        <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
+                    </button>
+
+                    {% if request.path == '/' %}
+                    <a href="/"
+                        class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2.5 rounded-full font-bold hover:shadow-lg hover:shadow-blue-500/30 transition-all transform hover:-translate-y-0.5 dark:from-blue-500 dark:to-indigo-500">
+                        Get Started
+                    </a>
+                    {% endif %}
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-2">
+                    <!-- Mobile Menu Button & Theme Toggle -->
+                    <button id="theme-toggle-mobile"
+                        class="p-2 text-gray-500 rounded-lg hover:text-blue-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 transition">
+                        <i id="theme-toggle-dark-icon-mobile" class="fas fa-moon hidden"></i>
+                        <i id="theme-toggle-light-icon-mobile" class="fas fa-sun hidden"></i>
+                    </button>
+                    <button id="mobile-menu-button"
+                        class="text-gray-500 hover:text-blue-600 focus:outline-none h-10 w-10 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay (Moved outside Nav) -->
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[100] bg-white dark:bg-gray-900 hidden flex flex-col transition-all duration-300">
+        <!-- Mobile Menu Header -->
+        <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+            <a href="/" class="text-xl font-black text-gray-900 dark:text-white tracking-tight">SnapFixer</a>
+            <button id="mobile-menu-close"
+                class="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto custom-scrollbar px-6 py-4 space-y-4">
+
+            <!-- Removed Translate and HR -->
+            <a href="/" class="block text-lg font-medium text-gray-800 dark:text-gray-200">Home</a>
+
+            <!-- By Country Accordion -->
+            <details class="group">
+                <summary
+                    class="flex items-center justify-between py-2 text-lg font-medium text-gray-800 dark:text-gray-200 cursor-pointer list-none">
+                    <span>By Country</span>
+                    <i class="fas fa-chevron-down text-sm text-gray-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <div class="pl-4 pt-2 space-y-3 border-l-2 border-gray-100 dark:border-gray-800 ml-1 mt-2">
+                    {% if custom_size_rule %}
+                    <a href="{% url 'tool_detail' slug=custom_size_rule.slug %}"
+                        class="block text-blue-600 font-bold dark:text-blue-400">
+                        <i class="fas fa-expand mr-2"></i> Custom Size
+                    </a>
+                    {% endif %}
+                    {% for country in nav_countries|slice:":15" %}
+                    <a href="{% url 'tool_detail' slug=country.slug %}" class="block text-gray-600 dark:text-gray-400">
+                        <span class="mr-2">{{ country.flag_emoji }}</span> {{ country.country }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </details>
+
+            <!-- Exams Accordion -->
+            <details class="group">
+                <summary
+                    class="flex items-center justify-between py-2 text-lg font-medium text-gray-800 dark:text-gray-200 cursor-pointer list-none">
+                    <span>Exams</span>
+                    <i class="fas fa-chevron-down text-sm text-gray-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <div class="pl-4 pt-2 space-y-3 border-l-2 border-gray-100 dark:border-gray-800 ml-1 mt-2">
+                    {% for country, data in exam_hierarchy.items %}
+                    {% if country == 'India' %}
+                    <details class="group/country" open>
+                        <summary
+                            class="flex items-center justify-between py-1 text-gray-700 dark:text-gray-300 cursor-pointer list-none font-medium">
+                            <span>{{ country }}</span>
+                            <i class="fas fa-chevron-down text-xs text-gray-400"></i>
+                        </summary>
+                        <div class="pl-4 pt-2 space-y-2">
+                            {% if data.states %}
+                            {% for state, orgs in data.states.items %}
+                            <details class="group/state">
+                                <summary
+                                    class="flex items-center justify-between py-1 text-gray-600 dark:text-gray-400 cursor-pointer list-none text-sm">
+                                    <span>{{ state }}</span>
+                                    <i class="fas fa-chevron-down text-xs text-gray-400"></i>
+                                </summary>
+                                <div class="pl-4 pt-2 space-y-2">
+                                    {% for org, exams in orgs.items %}
+                                    <div class="space-y-1">
+                                        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ org }}
+                                        </p>
+                                        {% for exam in exams %}
+                                        <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                            class="block text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600">
+                                            {{ exam.country }}
+                                        </a>
+                                        {% endfor %}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </details>
+                            {% endfor %}
+                            {% elif data.flat_exams %}
+                            {% for exam in data.flat_exams %}
+                            <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                class="block text-sm text-gray-600 dark:text-gray-400">
+                                {{ exam.country }}
+                            </a>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </details>
+                    {% endif %}
+                    {% endfor %}
+                    <div class="py-2 opacity-60">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest italic">Always updating our
+                            rules</p>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Visas Accordion -->
+            <details class="group">
+                <summary
+                    class="flex items-center justify-between py-2 text-lg font-medium text-gray-800 dark:text-gray-200 cursor-pointer list-none">
+                    <span>Visas</span>
+                    <i class="fas fa-chevron-down text-sm text-gray-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <div class="pl-4 pt-2 space-y-3 border-l-2 border-gray-100 dark:border-gray-800 ml-1 mt-2">
+                    {% for country, data in visa_hierarchy.items %}
+                    <details class="group/country">
+                        <summary
+                            class="flex items-center justify-between py-1 text-gray-700 dark:text-gray-300 cursor-pointer list-none font-medium">
+                            <span>{{ country }}</span>
+                            <i class="fas fa-chevron-down text-xs text-gray-400"></i>
+                        </summary>
+                        <div class="pl-4 pt-2 space-y-2">
+                            {% if data.orgs %}
+                            {% for org, exams in data.orgs.items %}
+                            <div class="space-y-1">
+                                <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">{{ org }}</p>
+                                {% for exam in exams %}
+                                <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                    class="block text-sm text-gray-500 dark:text-gray-400 hover:text-blue-600">
+                                    {{ exam.country }}
+                                </a>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                            {% elif data.flat_exams %}
+                            {% for exam in data.flat_exams %}
+                            <a href="{% url 'tool_detail' slug=exam.slug %}"
+                                class="block text-sm text-gray-600 dark:text-gray-400">
+                                {{ exam.country }}
+                            </a>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </details>
+                    {% endfor %}
+                </div>
+            </details>
+
+            <!-- Tools Accordion (Mobile) -->
+            <details class="group">
+                <summary
+                    class="flex items-center justify-between py-2 text-lg font-medium text-gray-800 dark:text-gray-200 cursor-pointer list-none">
+                    <span>Tools</span>
+                    <i class="fas fa-chevron-down text-sm text-gray-400 transition-transform group-open:rotate-180"></i>
+                </summary>
+                <div class="pl-4 pt-2 space-y-3 border-l-2 border-gray-100 dark:border-gray-800 ml-1 mt-2">
+                    {% for tool in nav_tools %}
+                    <a href="{% url 'tool_detail' slug=tool.slug %}" class="block text-gray-600 dark:text-gray-400">
+                        <span class="mr-2">{{ tool.flag_emoji|default:"🛠️" }}</span> {{ tool.country }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </details>
+
+
+            <a href="{% url 'about' %}" class="block text-lg font-medium text-gray-800 dark:text-gray-200">About Us</a>
+            <a href="{% url 'contact' %}" class="block text-lg font-medium text-gray-800 dark:text-gray-200">Contact</a>
+
+        </div>
+
+        <!-- Footer / CTA -->
+        <div class="p-6 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50">
+            {% if request.path == '/' %}
+            <a href="/"
+                class="block w-full text-center bg-blue-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-blue-700 transition">
+                Get Started
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <main class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer
+        class="bg-white border-t border-gray-100 mt-12 md:mt-16 transition-colors duration-300 dark:bg-gray-900 dark:border-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="/" class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-sm">
+                            <i class="fas fa-passport"></i>
+                        </div>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">SnapFixer</span>
+                    </a>
+                    <p class="text-gray-500 text-sm leading-relaxed dark:text-gray-400">
+                        The easiest way to create compliant passport and visa photos online. Secure, fast, and free.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4 capitalize dark:text-white">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        {% for tool in nav_tools|slice:":3" %}
+                        <li><a href="{% url 'tool_detail' slug=tool.slug %}"
+                                class="hover:text-blue-600 transition dark:hover:text-blue-400">{{ tool.country }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4 capitalize dark:text-white">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li><a href="{% url 'about' %}"
+                                class="hover:text-blue-600 transition dark:hover:text-blue-400">About Us</a></li>
+                        <li><a href="{% url 'blog_list' %}"
+                                class="hover:text-blue-600 transition dark:hover:text-blue-400">Blog</a></li>
+                        <li><a href="{% url 'contact' %}"
+                                class="hover:text-blue-600 transition dark:hover:text-blue-400">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4 capitalize dark:text-white">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li><a href="{% url 'privacy' %}"
+                                class="hover:text-blue-600 transition dark:hover:text-blue-400">Privacy Policy</a></li>
+                        <li><a href="{% url 'terms' %}"
+                                class="hover:text-blue-600 transition dark:hover:text-blue-400">Terms of Service</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4 capitalize dark:text-white">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="w-8 h-8 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-8 h-8 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a href="#"
+                            class="w-8 h-8 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition"><i
+                                class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-8 text-center text-sm text-gray-400 dark:border-gray-800">
+                &copy; 2026 SnapFixer.com. All rights reserved. Made with <i class="fas fa-heart text-red-500 mx-1"></i>
+                by
+                Jagadeeswaran K B.
+            </div>
+        </div>
+    </footer>
+    {% block extra_js %}{% endblock %}
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme toggle elements
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+            const themeToggleDarkIconMobile = document.getElementById('theme-toggle-dark-icon-mobile');
+            const themeToggleLightIconMobile = document.getElementById('theme-toggle-light-icon-mobile');
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleBtnMobile = document.getElementById('theme-toggle-mobile');
+
+            // Initialize theme icons
+            const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDark) {
+                if (themeToggleLightIcon) themeToggleLightIcon.classList.remove('hidden');
+                if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.remove('hidden');
+                if (themeToggleDarkIcon) themeToggleDarkIcon.classList.add('hidden');
+                if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.add('hidden');
+            } else {
+                if (themeToggleDarkIcon) themeToggleDarkIcon.classList.remove('hidden');
+                if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.remove('hidden');
+                if (themeToggleLightIcon) themeToggleLightIcon.classList.add('hidden');
+                if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.add('hidden');
+            }
+
+            function toggleTheme() {
+                if (themeToggleDarkIcon) themeToggleDarkIcon.classList.toggle('hidden');
+                if (themeToggleLightIcon) themeToggleLightIcon.classList.toggle('hidden');
+                if (themeToggleDarkIconMobile) themeToggleDarkIconMobile.classList.toggle('hidden');
+                if (themeToggleLightIconMobile) themeToggleLightIconMobile.classList.toggle('hidden');
+
+                if (localStorage.theme === 'light' || (!localStorage.theme && !document.documentElement.classList.contains('dark'))) {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+            if (themeToggleBtnMobile) themeToggleBtnMobile.addEventListener('click', toggleTheme);
+
+            // Mobile menu logic
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const translateElement = document.getElementById('google_translate_element');
+            const mobileTranslateContainer = document.getElementById('mobile_translate_container');
+            const desktopTranslateLocation = document.getElementById('theme-toggle')?.parentNode; // Safe reference
+
+            function toggleMobileMenu(show) {
+                if (!mobileMenu) return;
+
+                if (show) {
+                    mobileMenu.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden'; // Prevent body scroll
+
+                    // Move translate to mobile menu
+                    if (translateElement && mobileTranslateContainer) {
+                        mobileTranslateContainer.appendChild(translateElement);
+                    }
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = ''; // Restore body scroll
+
+                    // Move translate back to desktop header area
+                    if (translateElement && desktopTranslateLocation) {
+                        const themeBtn = document.getElementById('theme-toggle');
+                        desktopTranslateLocation.insertBefore(translateElement, themeBtn);
+                    }
+                }
+            }
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => toggleMobileMenu(true));
+            }
+
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', () => toggleMobileMenu(false));
+            }
+        });
+    </script>
