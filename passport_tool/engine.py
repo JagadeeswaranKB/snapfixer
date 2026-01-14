@@ -2,9 +2,7 @@ from PIL import Image, ImageOps, ImageFilter, ImageEnhance, ImageChops
 import io
 from pillow_heif import register_heif_opener
 register_heif_opener()
-from rembg import remove, new_session
 import os
-import cv2
 import numpy as np
 import time
 from django.core.files.base import ContentFile
@@ -13,6 +11,7 @@ from django.core.files.base import ContentFile
 SESSIONS = {}
 
 def get_session(model_name):
+    from rembg import new_session
     if model_name not in SESSIONS:
         SESSIONS[model_name] = new_session(model_name)
     return SESSIONS[model_name]
@@ -45,6 +44,7 @@ def process_image(image_bytes, width_mm, height_mm, bg_color, skip_bg=False, use
 
     if not skip_bg:
         if is_signature:
+            import cv2
             # OPENCV ADAPTIVE THRESHOLDING: Industry standard for signature processing
             # Use original high-res image logic (proxy is now original size)
             img_array = np.array(input_image.convert("RGB"))
@@ -137,6 +137,7 @@ def process_image(image_bytes, width_mm, height_mm, bg_color, skip_bg=False, use
             hq_input_bytes = buffer.getvalue()
             
             # 2. Get Mask with Alpha Matting (Slower but much better edges)
+            from rembg import remove
             mask_bytes = remove(
                 hq_input_bytes,
                 session=session,
@@ -207,6 +208,7 @@ def process_image(image_bytes, width_mm, height_mm, bg_color, skip_bg=False, use
         # Only perform face detection if NOT a signature
         faces = []
         if not is_signature:
+            import cv2
             # Detect on Proxy for Speed
             cv_img = cv2.cvtColor(np.array(proxy_image.convert("RGB")), cv2.COLOR_RGB2BGR)
             gray = cv2.cvtColor(cv_img, cv2.COLOR_BGR2GRAY)

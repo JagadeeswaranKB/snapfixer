@@ -3,12 +3,9 @@ from django.http import JsonResponse
 from django.contrib import messages
 from .models import CountryRule, ProcessedPhoto, ContactMessage
 import time
-from .tasks import process_photo_task
 
-# 100% SEO-Friendly Strategy: Configuration Dictionary
-# Legacy SEO_PAGES fallback (All configurations are now database-driven)
-SEO_PAGES = {}
 def tool_view(request, slug):
+    from .tasks import process_photo_task
     # 1. Search for rule in database by slug (supports custom user-defined slugs)
     try:
         rule = CountryRule.objects.get(slug=slug)
