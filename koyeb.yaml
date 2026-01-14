@@ -28,6 +28,7 @@ services:
       - http:
           path: /
           port: 8000
+        grace_period: 60
     regions:
       - fra
   - name: worker
