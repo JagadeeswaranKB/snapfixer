@@ -14,11 +14,11 @@ services:
       - key: PORT
         value: "8000"
       - key: SECRET_KEY
-        secret: SECRET_KEY
+        value: "{{ secret.SECRET_KEY }}"
       - key: DATABASE_URL
-        secret: DATABASE_URL
+        value: "{{ secret.DATABASE_URL }}"
       - key: REDIS_URL
-        secret: REDIS_URL
+        value: "{{ secret.REDIS_URL }}"
     instance_type: nano
     health_checks:
       - http:
@@ -32,11 +32,11 @@ services:
     command: celery -A validphoto worker -l info --pool=solo
     env:
       - key: SECRET_KEY
-        secret: SECRET_KEY
+        value: "{{ secret.SECRET_KEY }}"
       - key: DATABASE_URL
-        secret: DATABASE_URL
+        value: "{{ secret.DATABASE_URL }}"
       - key: REDIS_URL
-        secret: REDIS_URL
+        value: "{{ secret.REDIS_URL }}"
     instance_type: nano
     regions:
       - fra
