@@ -19,11 +19,11 @@ services:
           path: /
           port: 8000
     regions:
-      - fra # Frankfurt is usually good, or pick one closer to you
+      - sin # Singapore (Asia)
   - name: worker
     type: docker
     imageUri: .
     command: celery -A validphoto worker -l info --pool=solo
     instance_type: nano
     regions:
-      - fra
+      - sin
