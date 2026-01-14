@@ -13,7 +13,11 @@ env = environ.Env(
 # Reading .env file
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    # Fallback for local development if .env is missing
+    SECRET_KEY = 'django-insecure-fallback-key-change-me-in-production'
+
 DEBUG = env('DEBUG')
 
 # Handle ALLOWED_HOSTS from env or default
