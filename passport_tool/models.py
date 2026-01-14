@@ -67,8 +67,8 @@ class CountryRule(models.Model):
 
 class SiteSettings(models.Model):
     site_name = models.CharField(max_length=200, default="SnapFixer")
-    logo = models.ImageField(upload_to='settings/', help_text="Upload your site logo")
-    favicon = models.ImageField(upload_to='settings/', help_text="Upload your favicon (ico/png)")
+    logo = models.ImageField(upload_to='settings/', help_text="Upload your site logo", blank=True, null=True)
+    favicon = models.ImageField(upload_to='settings/', help_text="Upload your favicon (ico/png)", blank=True, null=True)
 
     class Meta:
         verbose_name = "Site Settings"
@@ -83,6 +83,20 @@ class SiteSettings(models.Model):
     def load(cls):
         obj, created = cls.objects.get_or_create(pk=1)
         return obj
+
+    @property
+    def logo_url(self):
+        try:
+            return self.logo.url
+        except:
+            return "/static/img/logo-fallback.png"
+
+    @property
+    def favicon_url(self):
+        try:
+            return self.favicon.url
+        except:
+            return "/favicon.ico"
 
     def __str__(self):
         return "Global Site Settings"
