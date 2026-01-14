@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+*.pyc
+__pycache__
+db.sqlite3
+media/
+static_root/
+venv/
+node_modules/
+.agent/
+brain/
+*.log
+Dockerfile
+koyeb.yaml
+docker-compose.yml
