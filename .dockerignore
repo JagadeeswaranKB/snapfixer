@@ -1,0 +1,15 @@
+.git
+.github
+__pycache__
+*.pyc
+env
+venv
+.env
+db.sqlite3
+static_root
+media_root
+.DS_Store
+*.log
+docs
+node_modules
+tests
